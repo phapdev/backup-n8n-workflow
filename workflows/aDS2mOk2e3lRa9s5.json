@@ -1,0 +1,518 @@
+{
+  "active": false,
+  "connections": {
+    "When clicking ‘Test workflow’": {
+      "main": [
+        [
+          {
+            "node": "search_file",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "search_file": {
+      "main": [
+        [
+          {
+            "node": "dowload",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "dowload": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items": {
+      "main": [
+        [],
+        [
+          {
+            "node": "Pinecone Vector Store",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Default Data Loader": {
+      "ai_document": [
+        [
+          {
+            "node": "Pinecone Vector Store",
+            "type": "ai_document",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Recursive Character Text Splitter": {
+      "ai_textSplitter": [
+        [
+          {
+            "node": "Default Data Loader",
+            "type": "ai_textSplitter",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Window Buffer Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Pinecone Vector Store1": {
+      "ai_vectorStore": [
+        [
+          {
+            "node": "Answer questions with a vector store",
+            "type": "ai_vectorStore",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Embeddings Google Gemini": {
+      "ai_embedding": [
+        [
+          {
+            "node": "Pinecone Vector Store1",
+            "type": "ai_embedding",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Answer questions with a vector store": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model1": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Answer questions with a vector store",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Embeddings Google Gemini1": {
+      "ai_embedding": [
+        [
+          {
+            "node": "Pinecone Vector Store",
+            "type": "ai_embedding",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Pinecone Vector Store": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-03-19T02:21:02.377Z",
+  "id": "aDS2mOk2e3lRa9s5",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Tranning AI",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        560,
+        560
+      ],
+      "id": "513997ac-c1ad-4616-b2ae-46cddc187ee2",
+      "name": "When clicking ‘Test workflow’"
+    },
+    {
+      "parameters": {
+        "resource": "fileFolder",
+        "filter": {
+          "folderId": {
+            "__rl": true,
+            "value": "12LOJsW1b_DTEDDE5SEe4uYinFJaNWImZ",
+            "mode": "list",
+            "cachedResultName": "pinecone_demo",
+            "cachedResultUrl": "https://drive.google.com/drive/folders/12LOJsW1b_DTEDDE5SEe4uYinFJaNWImZ"
+          }
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        780,
+        560
+      ],
+      "id": "a2454052-129d-47d5-81e9-4e0594718249",
+      "name": "search_file",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "OfHZDGa8nJdeX5vI",
+          "name": "phaplv@gfigroup"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "download",
+        "fileId": {
+          "__rl": true,
+          "value": "={{ $json.id }}",
+          "mode": "id"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        1000,
+        560
+      ],
+      "id": "2488de38-bbe4-4b7f-bcdb-23282c2f7098",
+      "name": "dowload",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "OfHZDGa8nJdeX5vI",
+          "name": "phaplv@gfigroup"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        1260,
+        540
+      ],
+      "id": "9560e199-2da2-4ca7-b9db-854588d7931f",
+      "name": "Loop Over Items"
+    },
+    {
+      "parameters": {
+        "dataType": "binary",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.documentDefaultDataLoader",
+      "typeVersion": 1,
+      "position": [
+        1680,
+        680
+      ],
+      "id": "1ff67502-77c2-4f2b-9a55-84434025fee1",
+      "name": "Default Data Loader"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.textSplitterRecursiveCharacterTextSplitter",
+      "typeVersion": 1,
+      "position": [
+        1540,
+        740
+      ],
+      "id": "2e511dab-be5c-4a48-b879-d6c0add35b0a",
+      "name": "Recursive Character Text Splitter"
+    },
+    {
+      "parameters": {
+        "content": "## Upload tài liệu",
+        "height": 423.4033827475994,
+        "width": 1480,
+        "color": 5
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        460,
+        460
+      ],
+      "typeVersion": 1,
+      "id": "9f4b8efb-3f89-4baa-a2cc-035aa8805d3c",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "options": {
+          "systemMessage": "=## Overview:\n- Bạn là AI trợ lý riêng của người dùng. Nhiệm vụ của bạn là tiếp nhận và hỗ trợ giải đáp thắc mắc của người dùng dựa trên tài liệu nội bộ\n\n## Công Cụ:\n- `dulieu`: Chứa dữ liệu nội bộ, dùng để tìm kiếm thông tin trước khi đưa ra phản hồi\n\n## Hướng dẫn:\n- Luôn gọi công cụ `dulieu` để tìm kiếm thông tin trước khi phản hồi\n- Không tự ý tìm kiếm thông tin bên ngoài\n- Nếu trong `dulieu` không có thông tin, phản hồi chưa có thông tin\n- Giao tiếp chuyên nghiệp, lịch sự"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.7,
+      "position": [
+        980,
+        1000
+      ],
+      "id": "8b9506a9-3b74-4896-83cb-130a0471bc56",
+      "name": "AI Agent",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        800,
+        1000
+      ],
+      "id": "b4982f5a-bb76-464e-8b75-d73f8c097284",
+      "name": "When chat message received",
+      "webhookId": "0a30838e-59c4-484c-8b87-2d84dc78e992",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "content": "## Chat",
+        "height": 560,
+        "width": 1060,
+        "color": 3
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        700,
+        900
+      ],
+      "typeVersion": 1,
+      "id": "9d99472c-3bf7-4ed4-8f66-bf7fb3b20f7f",
+      "name": "Sticky Note1",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "bd15cb68-8e9e-4de8-a3df-3fd37a74eeb3",
+      "name": "Google Gemini Chat Model",
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        860,
+        1240
+      ],
+      "credentials": {
+        "googlePalmApi": {
+          "id": "6sQPWovfrGWw4OT6",
+          "name": "phap1810"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {},
+      "id": "db343b2c-4531-4257-9a71-48e44927913d",
+      "name": "Window Buffer Memory",
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.2,
+      "position": [
+        1080,
+        1220
+      ],
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "pineconeIndex": {
+          "__rl": true,
+          "value": "dulieunoibo",
+          "mode": "list",
+          "cachedResultName": "dulieunoibo"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.vectorStorePinecone",
+      "typeVersion": 1,
+      "position": [
+        1260,
+        1240
+      ],
+      "id": "0937fed0-733c-42cf-8730-394a89514fa6",
+      "name": "Pinecone Vector Store1",
+      "credentials": {
+        "pineconeApi": {
+          "id": "Lm7YoWAxufS6lmlH",
+          "name": "PineconeApi phaplv"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {},
+      "id": "79cb7016-46d0-4211-9944-1a49fbc22356",
+      "name": "Embeddings Google Gemini",
+      "type": "@n8n/n8n-nodes-langchain.embeddingsGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        1260,
+        1360
+      ],
+      "credentials": {
+        "googlePalmApi": {
+          "id": "6sQPWovfrGWw4OT6",
+          "name": "phap1810"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "name": "dulieu",
+        "description": "Chứa dữ liệu nội bộ, truy vấn để tìm thông tin trả lời câu hỏi của người dùng"
+      },
+      "type": "@n8n/n8n-nodes-langchain.toolVectorStore",
+      "typeVersion": 1,
+      "position": [
+        1340,
+        1100
+      ],
+      "id": "8a4f649d-9339-4a2c-a4b8-d335f124e43e",
+      "name": "Answer questions with a vector store",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "da5c8ccf-7ab2-4da4-a66e-e95b9804063d",
+      "name": "Google Gemini Chat Model1",
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        1600,
+        1240
+      ],
+      "credentials": {
+        "googlePalmApi": {
+          "id": "6sQPWovfrGWw4OT6",
+          "name": "phap1810"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {},
+      "id": "a0159c1f-48bd-4fa3-abeb-b2da8ffc67ab",
+      "name": "Embeddings Google Gemini1",
+      "type": "@n8n/n8n-nodes-langchain.embeddingsGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        1420,
+        660
+      ],
+      "credentials": {
+        "googlePalmApi": {
+          "id": "6sQPWovfrGWw4OT6",
+          "name": "phap1810"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "mode": "insert",
+        "pineconeIndex": {
+          "__rl": true,
+          "value": "thesis",
+          "mode": "list",
+          "cachedResultName": "thesis"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.vectorStorePinecone",
+      "typeVersion": 1,
+      "position": [
+        1520,
+        500
+      ],
+      "id": "853ff1af-df40-46e5-a058-71a713d710e2",
+      "name": "Pinecone Vector Store",
+      "credentials": {
+        "pineconeApi": {
+          "id": "Lm7YoWAxufS6lmlH",
+          "name": "PineconeApi phaplv"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [
+    {
+      "createdAt": "2024-12-05T06:41:35.963Z",
+      "updatedAt": "2024-12-05T06:41:35.963Z",
+      "id": "bYaClAzW3pq0cW0u",
+      "name": "PHAP"
+    }
+  ],
+  "triggerCount": 0,
+  "updatedAt": "2025-03-19T03:33:47.000Z",
+  "versionId": "2e7ba819-650f-4e0d-824f-7213d4fcf245"
+}
