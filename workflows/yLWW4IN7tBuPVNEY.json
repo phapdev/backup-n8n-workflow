@@ -1,0 +1,167 @@
+{
+  "active": false,
+  "connections": {
+    "When clicking ‘Test workflow’": {
+      "main": [
+        [
+          {
+            "node": "Get file image3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        []
+      ]
+    },
+    "Get file image3": {
+      "main": [
+        [
+          {
+            "node": "Facebook Graph API",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Facebook Graph API": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-03-19T04:51:30.201Z",
+  "id": "yLWW4IN7tBuPVNEY",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "test",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "7e6a150e-e8db-4c00-ac38-36eba55694be",
+      "name": "When clicking ‘Test workflow’",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        1000,
+        280
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://graph.facebook.com/137851026084879/photos",
+        "sendBody": true,
+        "contentType": "form-urlencoded",
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "url",
+              "value": "https://drive.google.com/file/d/17PKz-BkVgoy_RpTK0u6egPc6WkiBmdVE/view?usp=sharing"
+            },
+            {
+              "name": "published",
+              "value": "true"
+            },
+            {
+              "name": "access_token",
+              "value": "EAAICtjCZApBkBO4Baae1TZCUZA3QRDEoDWl85NKfa2mXUziglDIqtQfQnAwl6AHwtoZBqvZCgT4OpalT9ltBCxNITStOSkIcKcf0ZC0C4DMnV2PcaTQ6xuWOet3XNoFEewzBAyFYHlZANPACw4bG5YFOWJr2zv5OYSFGq8mcoGPgryBOxlXM1k3ZAci3EwtGOTK90ogXnfucFg8isibjgGIZBmNivtmn5rZCyYthXMcvrn"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "41ceabda-aaca-4fac-ad6e-815872d94341",
+      "name": "HTTP Request",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1740,
+        160
+      ],
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "operation": "download",
+        "fileId": {
+          "__rl": true,
+          "value": "=https://drive.google.com/file/d/17PKz-BkVgoy_RpTK0u6egPc6WkiBmdVE/view?usp=sharing",
+          "mode": "url"
+        },
+        "options": {
+          "binaryPropertyName": "data"
+        }
+      },
+      "id": "e8cbd559-825f-44a7-a4e0-cad5c6ef7745",
+      "name": "Get file image3",
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        1280,
+        280
+      ],
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "OfHZDGa8nJdeX5vI",
+          "name": "phaplv@gfigroup"
+        }
+      },
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "httpRequestMethod": "POST",
+        "graphApiVersion": "v20.0",
+        "node": "me",
+        "edge": "photos",
+        "sendBinaryData": true,
+        "binaryPropertyName": "data",
+        "options": {
+          "queryParameters": {
+            "parameter": [
+              {
+                "name": "message",
+                "value": "VIPRO"
+              }
+            ]
+          }
+        }
+      },
+      "id": "2bf755ea-bc8e-45bb-a557-cc95bf7da92c",
+      "name": "Facebook Graph API",
+      "type": "n8n-nodes-base.facebookGraphApi",
+      "typeVersion": 1,
+      "position": [
+        1500,
+        180
+      ],
+      "credentials": {
+        "facebookGraphApi": {
+          "id": "e8oo9ocCXZ5bVaPl",
+          "name": "The France"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-03-31T04:57:02.000Z",
+  "versionId": "05dc308c-8349-4c46-b3f5-bf1b39d8020f"
+}
