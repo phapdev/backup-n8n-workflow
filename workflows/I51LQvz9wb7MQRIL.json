@@ -1,0 +1,410 @@
+{
+  "active": false,
+  "connections": {
+    "Code": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Google Sheets",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If1": {
+      "main": [
+        [
+          {
+            "node": "Code",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Sheets Trigger": {
+      "main": [
+        [
+          {
+            "node": "If1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2024-10-30T10:02:43.607Z",
+  "id": "I51LQvz9wb7MQRIL",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Get Reactions Telegram",
+  "nodes": [
+    {
+      "parameters": {
+        "url": "={{ $json.api_check }}",
+        "options": {}
+      },
+      "id": "cad3317a-065a-4ea7-b98c-12dc064ddd06",
+      "name": "HTTP Request",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1420,
+        140
+      ]
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForEachItem",
+        "jsCode": "function generateApiUrl(telegramLink) {\n    const apiBase = \"http://54.169.0.232:3000/api/message?\";\n    \n    // Sử dụng regex để lấy phần peer và id cuối cùng\n    const match = telegramLink.match(/t\\.me\\/([\\w_]+)(?:\\/\\d+)*\\/(\\d+)/);\n    if (!match) return \"Invalid Telegram link\";\n\n    const peer = match[1];\n    const id = match[2];\n\n    // Tạo URL API hoàn chỉnh\n    return `${apiBase}peer=${peer}&id=${id}`;\n}\n\nreturn {\n  api_check: generateApiUrl($json['Link message telegram'])\n}"
+      },
+      "id": "39471fd1-00e9-4742-8a26-8f5b4fbc4101",
+      "name": "Code",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1040,
+        260
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "1kdbl6o-T_HzCUfbnripELKrqKBXNpzOrzDIdsL3iRqo",
+          "mode": "list",
+          "cachedResultName": "Get Reactions Social",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1kdbl6o-T_HzCUfbnripELKrqKBXNpzOrzDIdsL3iRqo/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 867241290,
+          "mode": "list",
+          "cachedResultName": "Get reactions telegram",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1kdbl6o-T_HzCUfbnripELKrqKBXNpzOrzDIdsL3iRqo/edit#gid=867241290"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Total ReactionEmoji": "={{ $json.totalReactions }}",
+            "views": "={{ $json.views }}",
+            "title": "={{ $json.title }}",
+            "Link message telegram": "={{ $('Google Sheets Trigger').item.json['Link message telegram'] }}",
+            "reactions": "={{ $json.reactions }}"
+          },
+          "matchingColumns": [
+            "Link message telegram"
+          ],
+          "schema": [
+            {
+              "id": "Link message telegram",
+              "displayName": "Link message telegram",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Check",
+              "displayName": "Check",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "views",
+              "displayName": "views",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "title",
+              "displayName": "title",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "reactions",
+              "displayName": "reactions",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Total ReactionEmoji",
+              "displayName": "Total ReactionEmoji",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": true
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "32fdf10f-ba16-4564-891a-ecad0746ac76",
+      "name": "Google Sheets",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        1820,
+        140
+      ],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "cdH6UQi3ebck4po2",
+          "name": "Google Sheets account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "013084b1-35b1-4a9f-a612-b0e507bf7334",
+              "name": "totalReactions",
+              "value": "={{ $json.totalReactions }}",
+              "type": "number"
+            },
+            {
+              "id": "8db7b2dc-9950-495a-a7c8-b832c5207748",
+              "name": "reactions",
+              "value": "={{ $json[\"reactions\"].map(r => r.count + \" \" + r.reaction.emoticon).join(\", \") }}",
+              "type": "string"
+            },
+            {
+              "id": "5f53b01c-22b9-4c18-907c-a8293c313471",
+              "name": "views",
+              "value": "={{ $json.views }}",
+              "type": "number"
+            },
+            {
+              "id": "3dd331e5-b937-411c-9cdd-82698fc9cb54",
+              "name": "title",
+              "value": "={{ $json.title ? $json.title:\"Không có title\" }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "63ed3642-9677-4c45-b03d-f8848ac19903",
+      "name": "Edit Fields",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1620,
+        140
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "7adb0f16-8200-4cd9-8dd2-a69a5ec1876b",
+              "leftValue": "={{ $json.api_check }}",
+              "rightValue": "Invalid Telegram link",
+              "operator": {
+                "type": "string",
+                "operation": "notEquals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "cb5aff2a-cf1b-4cf6-80b4-9f6e9dff76ac",
+      "name": "If",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        1240,
+        260
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "ea25b040-16f6-4be6-a11c-a928ea45c75e",
+              "leftValue": "={{ $json.Check }}",
+              "rightValue": "Check",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            },
+            {
+              "id": "ea762a87-567b-4d2c-a5de-88b49956c49f",
+              "leftValue": "={{ $json['Link message telegram'] }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "exists",
+                "singleValue": true
+              }
+            },
+            {
+              "id": "31669864-b708-4d8c-ae47-cd4a8402e366",
+              "leftValue": "={{ $json['Link message telegram'] }}",
+              "rightValue": "https://t.me/",
+              "operator": {
+                "type": "string",
+                "operation": "startsWith"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "50d44655-7f90-45d2-8dfd-aed1324a094d",
+      "name": "If1",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        880,
+        400
+      ]
+    },
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyMinute"
+            }
+          ]
+        },
+        "documentId": {
+          "__rl": true,
+          "value": "1kdbl6o-T_HzCUfbnripELKrqKBXNpzOrzDIdsL3iRqo",
+          "mode": "list",
+          "cachedResultName": "Get Reactions Social",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1kdbl6o-T_HzCUfbnripELKrqKBXNpzOrzDIdsL3iRqo/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 867241290,
+          "mode": "list",
+          "cachedResultName": "Get reactions telegram",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1kdbl6o-T_HzCUfbnripELKrqKBXNpzOrzDIdsL3iRqo/edit#gid=867241290"
+        },
+        "options": {}
+      },
+      "id": "d9c8e5fc-5831-4a4e-bfa5-31c5df8ad2b9",
+      "name": "Google Sheets Trigger",
+      "type": "n8n-nodes-base.googleSheetsTrigger",
+      "typeVersion": 1,
+      "position": [
+        680,
+        400
+      ],
+      "credentials": {
+        "googleSheetsTriggerOAuth2Api": {
+          "id": "HtZv7RkoYKfcvqoc",
+          "name": "phapluong"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": {
+    "node:Google Sheets Trigger": {
+      "documentId": "1kdbl6o-T_HzCUfbnripELKrqKBXNpzOrzDIdsL3iRqo",
+      "sheetId": 867241290,
+      "lastRevision": 130,
+      "lastRevisionLink": "https://docs.google.com/spreadsheets/export?id=1kdbl6o-T_HzCUfbnripELKrqKBXNpzOrzDIdsL3iRqo&revision=130&exportFormat=xlsx"
+    }
+  },
+  "tags": [],
+  "triggerCount": 1,
+  "updatedAt": "2025-03-19T03:44:31.000Z",
+  "versionId": "954a302a-0317-4235-8bf8-cd103289dc5f"
+}
