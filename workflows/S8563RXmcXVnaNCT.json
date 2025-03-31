@@ -1,0 +1,345 @@
+{
+  "active": false,
+  "connections": {
+    "Gmail Trigger": {
+      "main": [
+        [
+          {
+            "node": "Text Classifier",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Text Classifier": {
+      "main": [
+        [
+          {
+            "node": "Hight priority",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Customer support",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "AI News",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Newsletter",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Web3",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Finance/Billing",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Text Classifier",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2024-11-23T02:19:27.077Z",
+  "id": "S8563RXmcXVnaNCT",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Add tags email",
+  "nodes": [
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyMinute"
+            }
+          ]
+        },
+        "simple": false,
+        "filters": {
+          "includeSpamTrash": false
+        },
+        "options": {}
+      },
+      "id": "e77eba30-86a7-41c4-9daf-eba3e5bfcfdb",
+      "name": "Gmail Trigger",
+      "type": "n8n-nodes-base.gmailTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        -940,
+        220
+      ],
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "s9fvzFdQKp17sMI3",
+          "name": "vonhatcuongyy@gmail.com"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "addLabels",
+        "messageId": "={{ $json.id }}",
+        "labelIds": [
+          "Label_1809936169157902738"
+        ]
+      },
+      "id": "effd5e89-03f5-4438-bc48-08d727d4d480",
+      "name": "Hight priority",
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        0,
+        0
+      ],
+      "webhookId": "122c0565-7d22-4dfa-863c-9daa64a88866",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "s9fvzFdQKp17sMI3",
+          "name": "vonhatcuongyy@gmail.com"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "addLabels",
+        "messageId": "={{ $json.id }}",
+        "labelIds": [
+          "Label_2714654066474763460"
+        ]
+      },
+      "id": "76b2ce39-97f1-44f8-8b59-9e4365c1be3e",
+      "name": "Customer support",
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        0,
+        180
+      ],
+      "webhookId": "baf3b35a-f102-4cb2-9ff7-75f43eb941b2",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "s9fvzFdQKp17sMI3",
+          "name": "vonhatcuongyy@gmail.com"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "addLabels",
+        "messageId": "={{ $json.id }}",
+        "labelIds": [
+          "Label_8063725452343499954"
+        ]
+      },
+      "id": "4ff614ee-0910-4fbc-a849-95ce24587871",
+      "name": "AI News",
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        0,
+        340
+      ],
+      "webhookId": "01e6c1b5-c536-492f-9a25-cf52e07744de",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "s9fvzFdQKp17sMI3",
+          "name": "vonhatcuongyy@gmail.com"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "addLabels",
+        "messageId": "={{ $json.id }}",
+        "labelIds": [
+          "Label_7770158137116765047"
+        ]
+      },
+      "id": "495b5178-e6eb-4c2e-b352-ec49b622ce5e",
+      "name": "Newsletter",
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        0,
+        500
+      ],
+      "webhookId": "5bdbf7df-fe16-46da-8544-ce0359c0092c",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "s9fvzFdQKp17sMI3",
+          "name": "vonhatcuongyy@gmail.com"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "inputText": "={{ $json.from.text }}",
+        "categories": {
+          "categories": [
+            {
+              "category": "Higth priority",
+              "description": "Emails requiring immediate attention or action, typically from key stakeholders, clients, or decision-makers. These emails often contain time-sensitive requests, deadlines, or escalated issues. Keywords: urgent, ASAP, immediate, deadline, action required, high priority."
+            },
+            {
+              "category": "Customer support",
+              "description": "Emails related to ongoing communication with current clients or customers, including service requests, feedback, support tickets, and inquiries. Keywords: request, inquiry, support, question, follow-up, feedback"
+            },
+            {
+              "category": "AI news",
+              "description": "News and updates related to artificial intelligence, covering advancements, industry trends, research breakthroughs, and key announcements from AI companies and researchers. These emails may include details about AI tools, applications, ethics, regulations, and market shifts. Keywords: AI, artificial intelligence, machine learning, deep learning."
+            },
+            {
+              "category": "Newsletter",
+              "description": "Regularly scheduled emails providing updates, news, or informational content to a subscribed audience. These emails typically include a summary of recent activities, upcoming events, product updates, or curated articles relevant to the audience’s interests. Keywords: newsletter, updates, summary, weekly, monthly, subscription, news."
+            },
+            {
+              "category": "Web3",
+              "description": "Emails or communications related to the decentralized web, focusing on blockchain technology, cryptocurrencies, decentralized applications (dApps), smart contracts, and decentralized finance (DeFi). These often include updates on Web3 protocols, technical advancements, ecosystem growth, and community-driven initiatives. Keywords: blockchain, DeFi, dApps, smart contracts, decentralized, Web3, crypto."
+            },
+            {
+              "category": "Finance/Billing",
+              "description": "Emails related to financial matters such as invoices, payment requests, account statements, billing reminders, or financial reports. These communications may include details about transactions, due dates, outstanding balances, and payment confirmations. Keywords: finance, billing, invoice, payment, account statement, balance, transaction, due date."
+            }
+          ]
+        },
+        "options": {
+          "systemPromptTemplate": "Please classify the text provided by the user into one of the following categories: {categories}, and use the provided formatting instructions below. Don't explain, and only output the json."
+        }
+      },
+      "id": "98ad0c28-a814-456e-acb0-702a9345e534",
+      "name": "Text Classifier",
+      "type": "@n8n/n8n-nodes-langchain.textClassifier",
+      "typeVersion": 1,
+      "position": [
+        -620,
+        220
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "addLabels",
+        "messageId": "={{ $json.id }}",
+        "labelIds": [
+          "Label_962805738814369982"
+        ]
+      },
+      "id": "37a60e70-a998-4787-b0b9-fe1a300b192c",
+      "name": "Web3",
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        0,
+        680
+      ],
+      "webhookId": "c1d64926-01fa-456c-8bf8-12ce5bd54f45",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "s9fvzFdQKp17sMI3",
+          "name": "vonhatcuongyy@gmail.com"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "addLabels",
+        "messageId": "={{ $json.id }}",
+        "labelIds": [
+          "Label_962805738814369982"
+        ]
+      },
+      "id": "ccb79873-f369-4052-b80f-278c7ed17268",
+      "name": "Finance/Billing",
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        0,
+        840
+      ],
+      "webhookId": "bd2e0a4e-a3c2-4698-afc8-108e15f9a47a",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "s9fvzFdQKp17sMI3",
+          "name": "vonhatcuongyy@gmail.com"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "modelName": "models/gemini-1.5-flash-latest",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        -480,
+        440
+      ],
+      "id": "1e96ef14-51f2-46f9-93f9-e563e02469a4",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "6AtETPHu5hDIjLf6",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": {
+    "node:Gmail Trigger": {
+      "Gmail Trigger": {
+        "lastTimeChecked": 1734833046,
+        "possibleDuplicates": [
+          "193ec1b89a0b1aa8",
+          "193ec171bd75b0d6"
+        ]
+      }
+    }
+  },
+  "tags": [
+    {
+      "createdAt": "2024-12-05T07:20:22.595Z",
+      "updatedAt": "2024-12-05T07:20:22.595Z",
+      "id": "KpIlDme7EFEf8d1X",
+      "name": "CUONG"
+    }
+  ],
+  "triggerCount": 1,
+  "updatedAt": "2024-12-27T10:08:58.000Z",
+  "versionId": "9be8d83b-8883-47c4-8dde-8e158ea3d403"
+}
