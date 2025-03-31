@@ -1,0 +1,785 @@
+{
+  "active": false,
+  "connections": {
+    "Google Sheets Manager": {
+      "main": [
+        [
+          {
+            "node": "Data retrieval",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Data retrieval": {
+      "main": [
+        [
+          {
+            "node": "Check have Public",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When clicking ‘Test workflow’": {
+      "main": [
+        [
+          {
+            "node": "Google Sheets Manager",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check have Public": {
+      "main": [
+        [
+          {
+            "node": "If1",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "If2",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "If3",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "If4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check-Facebook-Published": {
+      "main": [
+        [
+          {
+            "node": "Execute Facebook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check-X-published": {
+      "main": [
+        [
+          {
+            "node": "Execute Twitter",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If1": {
+      "main": [
+        [
+          {
+            "node": "Check-Facebook-Published",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If2": {
+      "main": [
+        [
+          {
+            "node": "Check-X-published",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If3": {
+      "main": [
+        [
+          {
+            "node": "Check-Telegram-Publish",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check-Telegram-Publish": {
+      "main": [
+        [
+          {
+            "node": "Execute Telegram",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If4": {
+      "main": [
+        [
+          {
+            "node": "Check-LinkedIn-Publish",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check-LinkedIn-Publish": {
+      "main": [
+        [
+          {
+            "node": "Execute LinkedIn",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "Google Sheets Manager",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-03-24T09:46:28.546Z",
+  "id": "3G3Egt5lTpofY0UA",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "Social",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "c22ddcad-ac29-426b-84f3-7d1d5447bc02",
+      "name": "When clicking ‘Test workflow’",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        200,
+        200
+      ]
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1WGigLC-lS3MfP4TQi4dLO8sY5MQaBN692Fem58aDyig",
+          "mode": "list",
+          "cachedResultName": "AutoFLow Social",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1WGigLC-lS3MfP4TQi4dLO8sY5MQaBN692Fem58aDyig/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 565641174,
+          "mode": "list",
+          "cachedResultName": "The France.",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1WGigLC-lS3MfP4TQi4dLO8sY5MQaBN692Fem58aDyig/edit#gid=565641174"
+        },
+        "options": {}
+      },
+      "id": "a6c551c9-f445-42ea-af35-c728d4db66fc",
+      "name": "Google Sheets Manager",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        420,
+        340
+      ],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "NEyiqKkPna62stP9",
+          "name": "phaplv@gfi"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "91970981-c1f2-46ad-b39d-19adb5306e38",
+              "name": "db_content",
+              "value": "={{ $json['Nội dung'] }}",
+              "type": "string"
+            },
+            {
+              "id": "b8432743-6371-4622-a1c6-e53093229cbc",
+              "name": "db_platform",
+              "value": "={{ $json['Nền tảng'] }}",
+              "type": "string"
+            },
+            {
+              "id": "cfe10209-045a-4cf7-97fa-1f8a3a7cbbe9",
+              "name": "db_facebook_status",
+              "value": "={{ $json['Trạng thái facebook'] }}",
+              "type": "string"
+            },
+            {
+              "id": "680a068c-a4f8-4772-bbcd-8023d3518c87",
+              "name": "db_postTime",
+              "value": "={{ $json['Lịch đăng'] }}",
+              "type": "string"
+            },
+            {
+              "id": "5ab22669-9685-4fe3-b96d-c47ae9eaa514",
+              "name": "db_owner",
+              "value": "={{ $json['Người thực hiện'] }}",
+              "type": "string"
+            },
+            {
+              "id": "f9650d65-f326-4855-96fc-366978502b83",
+              "name": "db_imageLink",
+              "value": "={{ $json['Hình ảnh'] }}",
+              "type": "string"
+            },
+            {
+              "id": "41533d95-3e53-4d8b-b084-807c778a7311",
+              "name": "db_postLink",
+              "value": "={{ $json['Link bài viết'] }}",
+              "type": "string"
+            },
+            {
+              "id": "66efe570-33d1-4847-82d7-f21078160f25",
+              "name": "db_totalReact",
+              "value": "={{ $json['Lượt tương tác'] }}",
+              "type": "string"
+            },
+            {
+              "id": "fd71fe1f-f7cd-4b41-858e-5605d9dff21f",
+              "name": "db_priority",
+              "value": "={{ $json['Độ ưu tiên'] }}",
+              "type": "string"
+            },
+            {
+              "id": "ee06355c-be50-4ca4-9a6a-e865c3cf4f3c",
+              "name": "db_row",
+              "value": "={{ $json.row_number }}",
+              "type": "string"
+            },
+            {
+              "id": "a50768ef-0030-4450-8969-7d64899bcdf2",
+              "name": "db_check",
+              "value": "={{ $json['Đăng bài'] }}",
+              "type": "string"
+            },
+            {
+              "id": "c0875dc4-604a-4b99-8037-ea0669226cdd",
+              "name": "formatPostime",
+              "value": "={{ DateTime.fromFormat($json[\"Lịch đăng\"], \"dd/MM/yyyy H:mm:ss\").toISO(); }}",
+              "type": "string"
+            },
+            {
+              "id": "24e3be39-772b-4f16-ae6d-878910a47577",
+              "name": "db_linkedIn_status",
+              "value": "={{ $json['Trạng thái Linked'] }}",
+              "type": "string"
+            },
+            {
+              "id": "501eacab-edcf-47d7-8ebd-0732592fcc45",
+              "name": "db_twitter_status",
+              "value": "={{ $json['Trạng thái twitter'] }}",
+              "type": "string"
+            },
+            {
+              "id": "5bcd24d4-e8eb-4ad5-96b5-7b129769c44d",
+              "name": "db_telegram_status",
+              "value": "={{ $json['Trạng thái telegram'] }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        620,
+        340
+      ],
+      "id": "58dd0e3f-fcce-41c0-8f38-d95ea83c6587",
+      "name": "Data retrieval"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "0ce30909-9a45-4a7a-afe2-5dcb7395cd8d",
+              "leftValue": "={{ $json.db_check.toLowerCase() }}",
+              "rightValue": "={{ $json.db_check.toLowerCase() }}",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            },
+            {
+              "id": "2672f311-4f7a-42b0-a83a-90e3c1fcf88d",
+              "leftValue": "={{ $json.formatPostime }}",
+              "rightValue": "={{ $now.toISO()}}",
+              "operator": {
+                "type": "dateTime",
+                "operation": "afterOrEquals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "looseTypeValidation": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        840,
+        340
+      ],
+      "id": "4d057e53-27ce-4822-a37c-143c7e2147bf",
+      "name": "Check have Public"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "8628963d-8340-4568-a3d8-e5a1719bd1f9",
+              "leftValue": "={{ $json.db_twitter_status }}",
+              "rightValue": "Mới",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "looseTypeValidation": true,
+        "options": {}
+      },
+      "id": "bd8e0353-8720-421c-89b8-fa357aa57ba7",
+      "name": "Check-X-published",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        1320,
+        200
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "8628963d-8340-4568-a3d8-e5a1719bd1f9",
+              "leftValue": "={{ $json.db_facebook_status }}",
+              "rightValue": "Mới",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "looseTypeValidation": true,
+        "options": {}
+      },
+      "id": "d1d27de3-c847-4dbb-84ea-c5c448f4d3e1",
+      "name": "Check-Facebook-Published",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        1320,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "83df4b57-94c0-4b3e-9727-7cb5bc50ce0a",
+              "leftValue": "={{ $json.db_platform }}",
+              "rightValue": "Facebook",
+              "operator": {
+                "type": "string",
+                "operation": "contains"
+              }
+            },
+            {
+              "id": "845dd0f8-def9-48a1-b142-3337e2dd5a66",
+              "leftValue": "={{ $json.db_platform }}",
+              "rightValue": "Tất cả",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "or"
+        },
+        "looseTypeValidation": true,
+        "options": {}
+      },
+      "id": "52f526bd-e293-46e9-ab32-c5845bb5364e",
+      "name": "If1",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        1080,
+        20
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "b8915917-0026-4344-910f-fd75e0e2bbd3",
+              "leftValue": "={{ $json.db_platform }}",
+              "rightValue": "Twitter",
+              "operator": {
+                "type": "string",
+                "operation": "contains"
+              }
+            },
+            {
+              "id": "619737b7-bb7a-4dfe-bb83-9200d15a1b61",
+              "leftValue": "={{ $json.db_platform }}",
+              "rightValue": "Tất cả",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "or"
+        },
+        "options": {}
+      },
+      "id": "b8df643a-9794-451c-8ae0-38cc6259a4ab",
+      "name": "If2",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        1080,
+        220
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "b8915917-0026-4344-910f-fd75e0e2bbd3",
+              "leftValue": "={{ $json.db_platform }}",
+              "rightValue": "LinkedIn",
+              "operator": {
+                "type": "string",
+                "operation": "contains"
+              }
+            },
+            {
+              "id": "619737b7-bb7a-4dfe-bb83-9200d15a1b61",
+              "leftValue": "={{ $json.db_platform }}",
+              "rightValue": "Tất cả",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "or"
+        },
+        "options": {}
+      },
+      "id": "e1a0d264-cb3b-4fbe-9514-04955e58a0ce",
+      "name": "If4",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        1080,
+        640
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "b8915917-0026-4344-910f-fd75e0e2bbd3",
+              "leftValue": "={{ $json.db_platform }}",
+              "rightValue": "Telegram",
+              "operator": {
+                "type": "string",
+                "operation": "contains"
+              }
+            },
+            {
+              "id": "619737b7-bb7a-4dfe-bb83-9200d15a1b61",
+              "leftValue": "={{ $json.db_platform }}",
+              "rightValue": "Tất cả",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "or"
+        },
+        "options": {}
+      },
+      "id": "d34c2d61-1ae2-495e-ad29-a1d7d9a8a973",
+      "name": "If3",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        1080,
+        440
+      ]
+    },
+    {
+      "parameters": {
+        "workflowId": {
+          "__rl": true,
+          "value": "ZnlgAzM2CgC9AyGD",
+          "mode": "list",
+          "cachedResultName": "Execute Facebook"
+        },
+        "mode": "each",
+        "options": {}
+      },
+      "id": "d7ce8721-341c-4b59-a9d2-2fd7a277cbcd",
+      "name": "Execute Facebook",
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1.1,
+      "position": [
+        1560,
+        -20
+      ],
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "workflowId": {
+          "__rl": true,
+          "value": "ds82TPFexO9r9oev",
+          "mode": "list",
+          "cachedResultName": "Excute-Twitter(x)"
+        },
+        "mode": "each",
+        "options": {}
+      },
+      "id": "ee593cec-2161-4572-9fab-2d79f476394d",
+      "name": "Execute Twitter",
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1.1,
+      "position": [
+        1560,
+        180
+      ]
+    },
+    {
+      "parameters": {
+        "workflowId": {
+          "__rl": true,
+          "value": "BTRzC5ntRYhBPJeD",
+          "mode": "list",
+          "cachedResultName": "Execute-Telegram"
+        },
+        "mode": "each",
+        "options": {}
+      },
+      "id": "c30e7928-d602-493f-8979-1bfbf93bd9f4",
+      "name": "Execute Telegram",
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1.1,
+      "position": [
+        1560,
+        400
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "8628963d-8340-4568-a3d8-e5a1719bd1f9",
+              "leftValue": "={{ $json.db_telegram_status }}",
+              "rightValue": "Mới",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "looseTypeValidation": true,
+        "options": {}
+      },
+      "id": "e2e27324-2b10-46c1-899d-00f8e02d7a42",
+      "name": "Check-Telegram-Publish",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        1320,
+        420
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "8628963d-8340-4568-a3d8-e5a1719bd1f9",
+              "leftValue": "={{ $json.db_linkedIn_status }}",
+              "rightValue": "Mới",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "looseTypeValidation": true,
+        "options": {}
+      },
+      "id": "84212db9-46e2-4628-a1d7-0ab6a615951a",
+      "name": "Check-LinkedIn-Publish",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        1320,
+        620
+      ]
+    },
+    {
+      "parameters": {
+        "workflowId": {
+          "__rl": true,
+          "value": "aB9lh4Od8UiBgXIS",
+          "mode": "list",
+          "cachedResultName": "Execute-LinkedIn"
+        },
+        "mode": "each",
+        "options": {}
+      },
+      "id": "c039a67b-942f-4c1c-a7f8-a317edeb5376",
+      "name": "Execute LinkedIn",
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1.1,
+      "position": [
+        1560,
+        600
+      ]
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "seconds",
+              "secondsInterval": 10
+            }
+          ]
+        }
+      },
+      "id": "62b41b72-749f-4832-9f98-736addaf8319",
+      "name": "Schedule Trigger",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        200,
+        440
+      ]
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-03-31T15:28:27.000Z",
+  "versionId": "7b915fd6-13b3-4a0e-b22e-affb0bf5b28f"
+}
