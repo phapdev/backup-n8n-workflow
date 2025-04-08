@@ -1,0 +1,108 @@
+{
+  "active": false,
+  "connections": {
+    "When clicking ‘Test workflow’": {
+      "main": [
+        [
+          {
+            "node": "Google Sheets",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Sheets": {
+      "main": [
+        [
+          {
+            "node": "Text Classifier",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-04-02T07:59:55.057Z",
+  "id": "rwIdreE6MzTMJxFt",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "TEST",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "bd0e00d0-03df-4607-bc2e-32831f591632",
+      "name": "When clicking ‘Test workflow’",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        740,
+        -60
+      ]
+    },
+    {
+      "parameters": {
+        "categories": {
+          "categories": [
+            {}
+          ]
+        },
+        "options": {
+          "systemPromptTemplate": "Please classify the text provided by the user into one of the following categories: {categories}, and use the provided formatting instructions below. Don't explain, and only output the json."
+        }
+      },
+      "id": "4f7f5c3b-177f-4e02-98d2-ca6aeecfce46",
+      "name": "Text Classifier",
+      "type": "@n8n/n8n-nodes-langchain.textClassifier",
+      "typeVersion": 1,
+      "position": [
+        1280,
+        -60
+      ]
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1rOVBzFxc59zOwI_S2nYvC2XYNCB6o7R2W2Igq9jmM5k",
+          "mode": "list",
+          "cachedResultName": "IDEATHON PROJECT SUBMISSION",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1rOVBzFxc59zOwI_S2nYvC2XYNCB6o7R2W2Igq9jmM5k/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Trang tính1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1rOVBzFxc59zOwI_S2nYvC2XYNCB6o7R2W2Igq9jmM5k/edit#gid=0"
+        },
+        "options": {}
+      },
+      "id": "ad216aac-efa7-4ca4-9d86-60fce496a6d8",
+      "name": "Google Sheets",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        980,
+        -60
+      ],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "NEyiqKkPna62stP9",
+          "name": "phaplv@gfi"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2025-04-08T04:14:38.000Z",
+  "versionId": "1231090f-2043-42fa-88d5-dab787ef441a"
+}
