@@ -23,12 +23,12 @@
       "main": [
         [
           {
-            "node": "Get file image",
+            "node": "Processing",
             "type": "main",
             "index": 0
           },
           {
-            "node": "Processing",
+            "node": "If1",
             "type": "main",
             "index": 0
           }
@@ -180,6 +180,35 @@
           }
         ]
       ]
+    },
+    "If1": {
+      "main": [
+        [
+          {
+            "node": "Get file image",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "LinkedIn-photos",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "createdAt": "2025-03-31T10:38:33.453Z",
@@ -201,8 +230,8 @@
       "type": "n8n-nodes-base.linkedIn",
       "typeVersion": 1,
       "position": [
-        620,
-        500
+        760,
+        560
       ],
       "alwaysOutputData": false,
       "credentials": {
@@ -222,8 +251,8 @@
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
       "position": [
-        840,
-        400
+        1160,
+        440
       ],
       "onError": "continueErrorOutput"
     },
@@ -456,8 +485,8 @@
       "type": "n8n-nodes-base.googleDrive",
       "typeVersion": 3,
       "position": [
-        360,
-        580
+        500,
+        460
       ],
       "credentials": {
         "googleDriveOAuth2Api": {
@@ -1041,6 +1070,53 @@
         980
       ],
       "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "eb2db085-3647-4390-a0a7-5ea4363bfb37",
+              "leftValue": "={{ $json.db_imageLink }}",
+              "rightValue": "drive.google.com",
+              "operator": {
+                "type": "string",
+                "operation": "contains"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "6fcb9e26-ee6a-4a7d-9157-e56e1c9a53ce",
+      "name": "If1",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        260,
+        580
+      ]
+    },
+    {
+      "parameters": {
+        "url": "={{ $json.db_imageLink }}",
+        "options": {}
+      },
+      "id": "90f19a25-5dc7-442c-9211-2f979e7f6ff9",
+      "name": "HTTP Request",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        500,
+        700
+      ]
     }
   ],
   "pinData": {},
@@ -1057,6 +1133,6 @@
     }
   ],
   "triggerCount": 0,
-  "updatedAt": "2025-03-31T15:58:24.000Z",
-  "versionId": "201ab21c-17a1-4c17-bd21-aaf7bc69df16"
+  "updatedAt": "2025-04-01T04:46:07.000Z",
+  "versionId": "29948246-a945-481e-951d-bef03a3dd9d1"
 }
