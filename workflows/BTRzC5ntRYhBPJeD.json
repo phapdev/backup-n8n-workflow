@@ -5,12 +5,12 @@
       "main": [
         [
           {
-            "node": "Get file image",
+            "node": "Processing",
             "type": "main",
             "index": 0
           },
           {
-            "node": "Processing",
+            "node": "If1",
             "type": "main",
             "index": 0
           }
@@ -173,6 +173,35 @@
           }
         ]
       ]
+    },
+    "If1": {
+      "main": [
+        [
+          {
+            "node": "Get file image",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "Telegram-Photos",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "createdAt": "2025-03-31T09:45:59.708Z",
@@ -204,7 +233,7 @@
             },
             {
               "id": "43f106c4-4649-4b1d-ba03-d4106e6fd690",
-              "leftValue": "={{ $json.db_facebook_status }}",
+              "leftValue": "={{ $json.db_telegram_status }}",
               "rightValue": "Mới",
               "operator": {
                 "type": "string",
@@ -456,7 +485,7 @@
       "typeVersion": 3,
       "position": [
         620,
-        640
+        600
       ],
       "credentials": {
         "googleDriveOAuth2Api": {
@@ -1040,9 +1069,78 @@
         1060
       ],
       "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "url": "={{ $json.db_imageLink }}",
+        "options": {}
+      },
+      "id": "97c051e6-ad82-458f-921e-7e52938532ce",
+      "name": "HTTP Request",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        620,
+        820
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "eb2db085-3647-4390-a0a7-5ea4363bfb37",
+              "leftValue": "={{ $json.db_imageLink }}",
+              "rightValue": "drive.google.com",
+              "operator": {
+                "type": "string",
+                "operation": "contains"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "b6ff6c8d-9445-490d-b642-acdf58315075",
+      "name": "If1",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        260,
+        640
+      ]
     }
   ],
-  "pinData": {},
+  "pinData": {
+    "Execute Workflow Facebook": [
+      {
+        "json": {
+          "db_content": "[𝐒𝐀𝐆𝐀 𝐁𝐎𝐎𝐓𝐂𝐀𝐌𝐏] AMA 2: SÁNG TẠO TUYỆT ĐỐI!\nTỪ Ý TƯỞNG ĐẾN THỰC TIỄN! BỎ TÚI NGAY TIPS XÂY DỰNG DAPPS “SIÊU” THÂN THIỆN NGƯỜI DÙNG VỚI SAGA PROTOCOL\n\n👉 THAM GIA NGAY ĐỂ KHÔNG BỎ LỠ: bit.ly/saga_ama2_vbifanpage\n\nSau 2 module tập trung vào phần demo và thực hành lập trình smart contract cho DApps, AMA 2 sẽ là dịp để các bạn lắng nghe những chia sẻ và giao lưu đặt câu hỏi trực tiếp với builder đang xây dựng dự án thực tế trên Saga Protocol. Anh Dragos Rouă - builder của dự án Flippando sẽ là khách mời của AMA 2 lần này.\n\n📍Hãy đặt lịch lúc 19:30 ngày 01/04 để không bỏ lỡ:\n- Nắm bắt ưu điểm của cơ sở hạ tầng để triển khai dự án hiệu quả trên Saga Protocol.\n- Roadmap chi tiết để xây dựng ứng dụng trên Saga.\n- Tips để triển khai ý tưởng và xây dựng ứng dụng trên Saga đúc kết từ kinh nghiệm và insight của builder có dự án được xây dựng trên Saga.\n- Q&A: Đặt câu hỏi trực tiếp cho giảng viên và diễn giả.",
+          "db_platform": "Telegram",
+          "db_facebook_status": "",
+          "db_postTime": "01/04/2025 12:02:00",
+          "db_owner": "",
+          "db_imageLink": "https://drive.google.com/file/d/1qYmESvqtbXmosaaM-S_QgF83FrA76WtU/view?usp=sharing",
+          "db_postLink": "https://t.me/phapdev/2/58,\n \nhttps://t.me/phapdev/2/57",
+          "db_totalReact": "",
+          "db_priority": "",
+          "db_row": "6",
+          "db_check": "true",
+          "formatPostime": "2025-04-01T12:02:00.000+07:00",
+          "db_linkedIn_status": "",
+          "db_twitter_status": "",
+          "db_telegram_status": "Mới"
+        }
+      }
+    ]
+  },
   "settings": {
     "executionOrder": "v1"
   },
@@ -1056,6 +1154,6 @@
     }
   ],
   "triggerCount": 0,
-  "updatedAt": "2025-03-31T10:28:09.000Z",
-  "versionId": "e612ca9b-a587-4829-b05a-87696c723238"
+  "updatedAt": "2025-04-01T05:03:47.000Z",
+  "versionId": "6b647770-32ff-42eb-b5d7-eb28f9693666"
 }
