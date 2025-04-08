@@ -1,22 +1,11 @@
 {
-  "active": false,
+  "active": true,
   "connections": {
-    "Google Sheets Manager": {
-      "main": [
-        [
-          {
-            "node": "Data retrieval",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "Data retrieval": {
       "main": [
         [
           {
-            "node": "Check have Public",
+            "node": "Filter",
             "type": "main",
             "index": 0
           }
@@ -27,33 +16,7 @@
       "main": [
         [
           {
-            "node": "Google Sheets Manager",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Check have Public": {
-      "main": [
-        [
-          {
-            "node": "If1",
-            "type": "main",
-            "index": 0
-          },
-          {
-            "node": "If2",
-            "type": "main",
-            "index": 0
-          },
-          {
-            "node": "If3",
-            "type": "main",
-            "index": 0
-          },
-          {
-            "node": "If4",
+            "node": "Execute Workflow",
             "type": "main",
             "index": 0
           }
@@ -82,55 +45,11 @@
         ]
       ]
     },
-    "If1": {
-      "main": [
-        [
-          {
-            "node": "Check-Facebook-Published",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "If2": {
-      "main": [
-        [
-          {
-            "node": "Check-X-published",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "If3": {
-      "main": [
-        [
-          {
-            "node": "Check-Telegram-Publish",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "Check-Telegram-Publish": {
       "main": [
         [
           {
             "node": "Execute Telegram",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "If4": {
-      "main": [
-        [
-          {
-            "node": "Check-LinkedIn-Publish",
             "type": "main",
             "index": 0
           }
@@ -148,11 +67,133 @@
         ]
       ]
     },
+    "Code": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items": {
+      "main": [
+        [
+          {
+            "node": "If8",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Code",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "[VBI]": {
+      "main": [
+        [
+          {
+            "node": "VBI DB",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "VBI DB": {
+      "main": [
+        [
+          {
+            "node": "Code",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
     "Schedule Trigger": {
       "main": [
         [
           {
-            "node": "Google Sheets Manager",
+            "node": "Execute Workflow",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If8": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Merge": {
+      "main": [
+        [
+          {
+            "node": "Data retrieval",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filter": {
+      "main": [
+        [
+          {
+            "node": "Check-Facebook-Published",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filter1": {
+      "main": [
+        [
+          {
+            "node": "Check-X-published",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filter2": {
+      "main": [
+        [
+          {
+            "node": "Check-Telegram-Publish",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filter3": {
+      "main": [
+        [
+          {
+            "node": "Check-LinkedIn-Publish",
             "type": "main",
             "index": 0
           }
@@ -165,7 +206,7 @@
   "meta": {
     "templateCredsSetupCompleted": true
   },
-  "name": "Social",
+  "name": "[VBI] Manager Social",
   "nodes": [
     {
       "parameters": {},
@@ -174,42 +215,9 @@
       "type": "n8n-nodes-base.manualTrigger",
       "typeVersion": 1,
       "position": [
-        200,
-        200
+        140,
+        -20
       ]
-    },
-    {
-      "parameters": {
-        "documentId": {
-          "__rl": true,
-          "value": "1WGigLC-lS3MfP4TQi4dLO8sY5MQaBN692Fem58aDyig",
-          "mode": "list",
-          "cachedResultName": "AutoFLow Social",
-          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1WGigLC-lS3MfP4TQi4dLO8sY5MQaBN692Fem58aDyig/edit?usp=drivesdk"
-        },
-        "sheetName": {
-          "__rl": true,
-          "value": 565641174,
-          "mode": "list",
-          "cachedResultName": "The France.",
-          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1WGigLC-lS3MfP4TQi4dLO8sY5MQaBN692Fem58aDyig/edit#gid=565641174"
-        },
-        "options": {}
-      },
-      "id": "a6c551c9-f445-42ea-af35-c728d4db66fc",
-      "name": "Google Sheets Manager",
-      "type": "n8n-nodes-base.googleSheets",
-      "typeVersion": 4.5,
-      "position": [
-        420,
-        340
-      ],
-      "credentials": {
-        "googleSheetsOAuth2Api": {
-          "id": "NEyiqKkPna62stP9",
-          "name": "phaplv@gfi"
-        }
-      }
     },
     {
       "parameters": {
@@ -253,8 +261,8 @@
             },
             {
               "id": "41533d95-3e53-4d8b-b084-807c778a7311",
-              "name": "db_postLink",
-              "value": "={{ $json['Link bài viết'] }}",
+              "name": "db_postLink_facbook",
+              "value": "={{ $json['Link bài viết facebook'] }}",
               "type": "string"
             },
             {
@@ -290,7 +298,7 @@
             {
               "id": "24e3be39-772b-4f16-ae6d-878910a47577",
               "name": "db_linkedIn_status",
-              "value": "={{ $json['Trạng thái Linked'] }}",
+              "value": "={{ $json['Trạng thái linkedIn'] }}",
               "type": "string"
             },
             {
@@ -304,6 +312,48 @@
               "name": "db_telegram_status",
               "value": "={{ $json['Trạng thái telegram'] }}",
               "type": "string"
+            },
+            {
+              "id": "bcf89b36-f2dc-4e62-8f7a-a58ba5d9962c",
+              "name": "db_sheet_link",
+              "value": "={{ $json.Db_link }}",
+              "type": "string"
+            },
+            {
+              "id": "06cc3aba-8f0a-4fa9-9da6-ea3863ef6fd9",
+              "name": "db_fanpage_id",
+              "value": "={{ $json.id }}",
+              "type": "string"
+            },
+            {
+              "id": "6720d11f-97db-4857-8d20-21a8caf8222a",
+              "name": "db_postLink_linkedIn",
+              "value": "={{ $json['Trạng thái linkedIn'] }}",
+              "type": "string"
+            },
+            {
+              "id": "e6f0852b-faba-4a28-824d-cfd2fff21d6a",
+              "name": "db_postLink_twitter",
+              "value": "={{ $json['Trạng thái twitter'] }}",
+              "type": "string"
+            },
+            {
+              "id": "22521c59-ae90-4654-818f-a4115a4608cc",
+              "name": "db_postLink_telegram",
+              "value": "={{ $json['Trạng thái telegram'] }}",
+              "type": "string"
+            },
+            {
+              "id": "d866dd7e-922b-4bcf-9fed-149f3da0a783",
+              "name": "db_sheet_id",
+              "value": "={{ $json.sheet_id }}",
+              "type": "string"
+            },
+            {
+              "id": "cb2a587b-87cb-43d4-9dd2-24bbbc546d4b",
+              "name": "fb_access_token",
+              "value": "={{ $json.fb_access_token }}",
+              "type": "string"
             }
           ]
         },
@@ -312,55 +362,11 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        620,
-        340
+        660,
+        460
       ],
       "id": "58dd0e3f-fcce-41c0-8f38-d95ea83c6587",
       "name": "Data retrieval"
-    },
-    {
-      "parameters": {
-        "conditions": {
-          "options": {
-            "caseSensitive": true,
-            "leftValue": "",
-            "typeValidation": "loose",
-            "version": 2
-          },
-          "conditions": [
-            {
-              "id": "0ce30909-9a45-4a7a-afe2-5dcb7395cd8d",
-              "leftValue": "={{ $json.db_check.toLowerCase() }}",
-              "rightValue": "={{ $json.db_check.toLowerCase() }}",
-              "operator": {
-                "type": "boolean",
-                "operation": "true",
-                "singleValue": true
-              }
-            },
-            {
-              "id": "2672f311-4f7a-42b0-a83a-90e3c1fcf88d",
-              "leftValue": "={{ $json.formatPostime }}",
-              "rightValue": "={{ $now.toISO()}}",
-              "operator": {
-                "type": "dateTime",
-                "operation": "afterOrEquals"
-              }
-            }
-          ],
-          "combinator": "and"
-        },
-        "looseTypeValidation": true,
-        "options": {}
-      },
-      "type": "n8n-nodes-base.if",
-      "typeVersion": 2.2,
-      "position": [
-        840,
-        340
-      ],
-      "id": "4d057e53-27ce-4822-a37c-143c7e2147bf",
-      "name": "Check have Public"
     },
     {
       "parameters": {
@@ -392,9 +398,10 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.2,
       "position": [
-        1320,
-        200
-      ]
+        1460,
+        120
+      ],
+      "disabled": true
     },
     {
       "parameters": {
@@ -426,181 +433,8 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.2,
       "position": [
-        1320,
-        0
-      ]
-    },
-    {
-      "parameters": {
-        "conditions": {
-          "options": {
-            "caseSensitive": true,
-            "leftValue": "",
-            "typeValidation": "loose",
-            "version": 2
-          },
-          "conditions": [
-            {
-              "id": "83df4b57-94c0-4b3e-9727-7cb5bc50ce0a",
-              "leftValue": "={{ $json.db_platform }}",
-              "rightValue": "Facebook",
-              "operator": {
-                "type": "string",
-                "operation": "contains"
-              }
-            },
-            {
-              "id": "845dd0f8-def9-48a1-b142-3337e2dd5a66",
-              "leftValue": "={{ $json.db_platform }}",
-              "rightValue": "Tất cả",
-              "operator": {
-                "type": "string",
-                "operation": "equals",
-                "name": "filter.operator.equals"
-              }
-            }
-          ],
-          "combinator": "or"
-        },
-        "looseTypeValidation": true,
-        "options": {}
-      },
-      "id": "52f526bd-e293-46e9-ab32-c5845bb5364e",
-      "name": "If1",
-      "type": "n8n-nodes-base.if",
-      "typeVersion": 2.2,
-      "position": [
-        1080,
-        20
-      ]
-    },
-    {
-      "parameters": {
-        "conditions": {
-          "options": {
-            "caseSensitive": true,
-            "leftValue": "",
-            "typeValidation": "strict",
-            "version": 2
-          },
-          "conditions": [
-            {
-              "id": "b8915917-0026-4344-910f-fd75e0e2bbd3",
-              "leftValue": "={{ $json.db_platform }}",
-              "rightValue": "Twitter",
-              "operator": {
-                "type": "string",
-                "operation": "contains"
-              }
-            },
-            {
-              "id": "619737b7-bb7a-4dfe-bb83-9200d15a1b61",
-              "leftValue": "={{ $json.db_platform }}",
-              "rightValue": "Tất cả",
-              "operator": {
-                "type": "string",
-                "operation": "equals",
-                "name": "filter.operator.equals"
-              }
-            }
-          ],
-          "combinator": "or"
-        },
-        "options": {}
-      },
-      "id": "b8df643a-9794-451c-8ae0-38cc6259a4ab",
-      "name": "If2",
-      "type": "n8n-nodes-base.if",
-      "typeVersion": 2.2,
-      "position": [
-        1080,
-        220
-      ]
-    },
-    {
-      "parameters": {
-        "conditions": {
-          "options": {
-            "caseSensitive": true,
-            "leftValue": "",
-            "typeValidation": "strict",
-            "version": 2
-          },
-          "conditions": [
-            {
-              "id": "b8915917-0026-4344-910f-fd75e0e2bbd3",
-              "leftValue": "={{ $json.db_platform }}",
-              "rightValue": "LinkedIn",
-              "operator": {
-                "type": "string",
-                "operation": "contains"
-              }
-            },
-            {
-              "id": "619737b7-bb7a-4dfe-bb83-9200d15a1b61",
-              "leftValue": "={{ $json.db_platform }}",
-              "rightValue": "Tất cả",
-              "operator": {
-                "type": "string",
-                "operation": "equals",
-                "name": "filter.operator.equals"
-              }
-            }
-          ],
-          "combinator": "or"
-        },
-        "options": {}
-      },
-      "id": "e1a0d264-cb3b-4fbe-9514-04955e58a0ce",
-      "name": "If4",
-      "type": "n8n-nodes-base.if",
-      "typeVersion": 2.2,
-      "position": [
-        1080,
-        640
-      ]
-    },
-    {
-      "parameters": {
-        "conditions": {
-          "options": {
-            "caseSensitive": true,
-            "leftValue": "",
-            "typeValidation": "strict",
-            "version": 2
-          },
-          "conditions": [
-            {
-              "id": "b8915917-0026-4344-910f-fd75e0e2bbd3",
-              "leftValue": "={{ $json.db_platform }}",
-              "rightValue": "Telegram",
-              "operator": {
-                "type": "string",
-                "operation": "contains"
-              }
-            },
-            {
-              "id": "619737b7-bb7a-4dfe-bb83-9200d15a1b61",
-              "leftValue": "={{ $json.db_platform }}",
-              "rightValue": "Tất cả",
-              "operator": {
-                "type": "string",
-                "operation": "equals",
-                "name": "filter.operator.equals"
-              }
-            }
-          ],
-          "combinator": "or"
-        },
-        "options": {}
-      },
-      "id": "d34c2d61-1ae2-495e-ad29-a1d7d9a8a973",
-      "name": "If3",
-      "type": "n8n-nodes-base.if",
-      "typeVersion": 2.2,
-      "position": [
-        1080,
-        440
+        1460,
+        -100
       ]
     },
     {
@@ -619,8 +453,8 @@
       "type": "n8n-nodes-base.executeWorkflow",
       "typeVersion": 1.1,
       "position": [
-        1560,
-        -20
+        1760,
+        -100
       ],
       "onError": "continueRegularOutput"
     },
@@ -640,9 +474,10 @@
       "type": "n8n-nodes-base.executeWorkflow",
       "typeVersion": 1.1,
       "position": [
-        1560,
-        180
-      ]
+        1760,
+        120
+      ],
+      "disabled": true
     },
     {
       "parameters": {
@@ -660,9 +495,10 @@
       "type": "n8n-nodes-base.executeWorkflow",
       "typeVersion": 1.1,
       "position": [
-        1560,
-        400
-      ]
+        1760,
+        320
+      ],
+      "disabled": true
     },
     {
       "parameters": {
@@ -694,9 +530,10 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.2,
       "position": [
-        1320,
-        420
-      ]
+        1460,
+        320
+      ],
+      "disabled": true
     },
     {
       "parameters": {
@@ -728,9 +565,10 @@
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.2,
       "position": [
-        1320,
-        620
-      ]
+        1460,
+        480
+      ],
+      "disabled": true
     },
     {
       "parameters": {
@@ -748,9 +586,10 @@
       "type": "n8n-nodes-base.executeWorkflow",
       "typeVersion": 1.1,
       "position": [
-        1560,
-        600
-      ]
+        1760,
+        480
+      ],
+      "disabled": true
     },
     {
       "parameters": {
@@ -768,18 +607,531 @@
       "type": "n8n-nodes-base.scheduleTrigger",
       "typeVersion": 1.2,
       "position": [
-        200,
-        440
+        140,
+        160
       ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Lấy giá trị formatPostime và thời gian hiện tại\nconst inputDateString = $json['Lịch đăng'];\n\n// Chuyển đổi từ định dạng dd/MM/yyyy thành MM/dd/yyyy\nconst dateParts = inputDateString.split(\" \")[0].split(\"/\"); // Tách phần ngày (18/04/2025)\nconst timePart = inputDateString.split(\" \")[1]; // Lấy phần giờ (00:00:00)\n\n// Đổi vị trí ngày và tháng, chuyển thành MM/dd/yyyy\nconst formattedDate = `${dateParts[1]}/${dateParts[0]}/${dateParts[2]} ${timePart}`;\n\n\nconst dateVN = new Date(formattedDate);\n\n// Lấy thời gian hiện tại (UTC)\nconst currentTime = new Date();\n\n// Chuyển đổi thời gian hiện tại sang múi giờ Việt Nam (UTC +7)\nconst currentTimeVN = new Date(currentTime.getTime() + (7 * 60 * 60 * 1000)); // Cộng thêm 7 giờ\n\n// Tính toán sự khác biệt giữa thời gian hiện tại và formatPostime\nconst timeDifference = dateVN - currentTimeVN;\n// console.log(\"currentTimeVN: \", currentTimeVN)\n// console.log(\"dateVN: \", dateVN)\n// console.log(\"timeDifference: \", timeDifference)\n// console.log(\"\\n ====== \\n\")\n\n  \n// Kiểm tra nếu sự khác biệt nhỏ hơn hoặc bằng 5 phút (5 phút = 300000 milliseconds)\nif (timeDifference <= 300000 && timeDifference >= 0) {\n    // Nếu điều kiện thỏa mãn, tiếp tục chạy flow\n  for (const item of $input.all()) {\n    item.json.proceed = true;\n  }\n  return $input.all();\n} else {\n    // Nếu không, dừng flow\n  for (const item of $input.all()) {\n    item.json.proceed = false;\n  }\n  return $input.all();\n}"
+      },
+      "id": "6ac29160-ab90-4a4a-aa73-941f4874c0b9",
+      "name": "Code",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        40,
+        820
+      ]
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "e559a5db-c746-4c3f-b09a-592f80b00e2c",
+      "name": "Loop Over Items",
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        260,
+        820
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "4c5973dc-43f4-4220-8c3a-cd9b574fb71f",
+              "leftValue": "={{ $json.proceed }}",
+              "rightValue": "",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "looseTypeValidation": true,
+        "options": {}
+      },
+      "id": "0f4df780-e063-4d55-9b21-5c0dc67221cf",
+      "name": "If8",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        460,
+        820
+      ]
+    },
+    {
+      "parameters": {
+        "content": "# Check: kiểm tra thời gian đăng bài\n",
+        "height": 386.1324449230852,
+        "width": 828.295798477547,
+        "color": 4
+      },
+      "id": "01ca4afd-69d8-43e2-9d31-67dc5cb32e84",
+      "name": "Sticky Note",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -20,
+        680
+      ],
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1eQar2hOIhGxyeCFvXcoxe3yNgwtXHe6kfMbN32hPMSo",
+          "mode": "list",
+          "cachedResultName": "[VBI] - Social Manager",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1eQar2hOIhGxyeCFvXcoxe3yNgwtXHe6kfMbN32hPMSo/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "={{ $json.sheet_id }}",
+          "mode": "id"
+        },
+        "filtersUI": {
+          "values": [
+            {
+              "lookupColumn": "Đăng bài",
+              "lookupValue": "true"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "a6c551c9-f445-42ea-af35-c728d4db66fc",
+      "name": "VBI DB",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        260,
+        460
+      ],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "NEyiqKkPna62stP9",
+          "name": "phaplv@gfi"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "workflowId": {
+          "__rl": true,
+          "value": "3G3Egt5lTpofY0UA",
+          "mode": "list",
+          "cachedResultName": "[VBI] Manager Social"
+        },
+        "mode": "each",
+        "options": {}
+      },
+      "id": "17f28ae6-bdff-4f6b-b3e5-66e1873fc113",
+      "name": "Execute Workflow",
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1.1,
+      "position": [
+        380,
+        60
+      ]
+    },
+    {
+      "parameters": {},
+      "id": "a5de532c-0df5-4597-800f-ba7f0894081c",
+      "name": "[VBI]",
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1,
+      "position": [
+        20,
+        460
+      ]
+    },
+    {
+      "parameters": {
+        "content": "## Luồng đăng facebook\n## [Link Workflow](https://pip-tf-automation.southeastasia.cloudapp.azure.com/workflow/ZnlgAzM2CgC9AyGD)",
+        "height": 169.64698495251852,
+        "width": 1213.853913959688,
+        "color": 5
+      },
+      "id": "26567736-827f-4f81-b33f-130827444729",
+      "name": "Sticky Note2",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        840,
+        -120
+      ]
+    },
+    {
+      "parameters": {
+        "content": "## Twitter(X)\n## [Link Workflow](https://pip-tf-automation.southeastasia.cloudapp.azure.com/workflow/ds82TPFexO9r9oev)",
+        "height": 177.27139596216406,
+        "width": 1213.853913959688,
+        "color": 7
+      },
+      "id": "0adbe730-c57d-408e-9f08-664c80f96eb5",
+      "name": "Sticky Note3",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        840,
+        80
+      ]
+    },
+    {
+      "parameters": {
+        "content": "## Lấy dữ liệu và chuẩn bị dữ liệu cho các flow nếu thoả điều kiện",
+        "height": 259.6256176685447,
+        "width": 833.3143593451888,
+        "color": 2
+      },
+      "id": "c903407e-84f8-498c-9801-be077cf74f21",
+      "name": "Sticky Note4",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -20,
+        360
+      ]
+    },
+    {
+      "parameters": {
+        "content": "## Luồng đăng telegram\n## [Link Workflow](https://pip-tf-automation.southeastasia.cloudapp.azure.com/workflow/BTRzC5ntRYhBPJeD)",
+        "width": 1213.853913959688,
+        "color": 6
+      },
+      "id": "b818a3c5-0411-437f-9aac-18eacdd97eef",
+      "name": "Sticky Note5",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        840,
+        280
+      ]
+    },
+    {
+      "parameters": {
+        "content": "## Luồng đăng LinkedIn\n## [Link Workflow](https://pip-tf-automation.southeastasia.cloudapp.azure.com/workflow/aB9lh4Od8UiBgXIS)",
+        "width": 1213.853913959688,
+        "color": 4
+      },
+      "id": "12ec1151-c87c-4faf-9e99-1a354212d714",
+      "name": "Sticky Note6",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        840,
+        460
+      ]
+    },
+    {
+      "parameters": {
+        "content": "## Set dữ liệu Fanpage\n- id, accessToken, link sheet cho từng page",
+        "height": 459.9199132879962,
+        "width": 833.3143593451888,
+        "color": 2
+      },
+      "id": "59532e20-aa4b-4d97-be05-d4535bcef15c",
+      "name": "Sticky Note7",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -20,
+        -120
+      ]
+    },
+    {
+      "parameters": {
+        "mode": "combine",
+        "combineBy": "combineAll",
+        "options": {}
+      },
+      "id": "8fa125a6-e299-4a4d-b208-804e8215a1cc",
+      "name": "Merge",
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3,
+      "position": [
+        680,
+        820
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "8e43ce6e-b46a-4afc-b043-0bbabdc40d22",
+              "leftValue": "={{ $json.db_platform }}",
+              "rightValue": "Facebook",
+              "operator": {
+                "type": "string",
+                "operation": "contains"
+              }
+            },
+            {
+              "id": "1d4f6006-aae4-4e61-9862-213afd31c78d",
+              "leftValue": "={{ $json.db_platform }}",
+              "rightValue": "Tất cả",
+              "operator": {
+                "type": "string",
+                "operation": "contains"
+              }
+            }
+          ],
+          "combinator": "or"
+        },
+        "looseTypeValidation": true,
+        "options": {}
+      },
+      "id": "cd56a155-81b0-45cd-99ee-9d3616723ffb",
+      "name": "Filter",
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2.2,
+      "position": [
+        1200,
+        -100
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "8e43ce6e-b46a-4afc-b043-0bbabdc40d22",
+              "leftValue": "={{ $json.db_platform }}",
+              "rightValue": "Twitter",
+              "operator": {
+                "type": "string",
+                "operation": "contains"
+              }
+            },
+            {
+              "id": "1d4f6006-aae4-4e61-9862-213afd31c78d",
+              "leftValue": "={{ $json.db_platform }}",
+              "rightValue": "Tất cả",
+              "operator": {
+                "type": "string",
+                "operation": "contains"
+              }
+            }
+          ],
+          "combinator": "or"
+        },
+        "looseTypeValidation": true,
+        "options": {}
+      },
+      "id": "f767aae5-c41c-45d4-8a85-8ececef0bea4",
+      "name": "Filter1",
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2.2,
+      "position": [
+        1200,
+        120
+      ],
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "8e43ce6e-b46a-4afc-b043-0bbabdc40d22",
+              "leftValue": "={{ $json.db_platform }}",
+              "rightValue": "Telegram",
+              "operator": {
+                "type": "string",
+                "operation": "contains"
+              }
+            },
+            {
+              "id": "1d4f6006-aae4-4e61-9862-213afd31c78d",
+              "leftValue": "={{ $json.db_platform }}",
+              "rightValue": "Tất cả",
+              "operator": {
+                "type": "string",
+                "operation": "contains"
+              }
+            }
+          ],
+          "combinator": "or"
+        },
+        "looseTypeValidation": true,
+        "options": {}
+      },
+      "id": "164f90ff-4162-4dce-9108-ab2552451d9d",
+      "name": "Filter2",
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2.2,
+      "position": [
+        1200,
+        320
+      ],
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "8e43ce6e-b46a-4afc-b043-0bbabdc40d22",
+              "leftValue": "={{ $json.db_platform }}",
+              "rightValue": "LinkedIn",
+              "operator": {
+                "type": "string",
+                "operation": "contains"
+              }
+            },
+            {
+              "id": "1d4f6006-aae4-4e61-9862-213afd31c78d",
+              "leftValue": "={{ $json.db_platform }}",
+              "rightValue": "Tất cả",
+              "operator": {
+                "type": "string",
+                "operation": "contains"
+              }
+            }
+          ],
+          "combinator": "or"
+        },
+        "looseTypeValidation": true,
+        "options": {}
+      },
+      "id": "bfc2375e-afa5-4cd8-ba27-5f063035dec8",
+      "name": "Filter3",
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2.2,
+      "position": [
+        1200,
+        480
+      ],
+      "disabled": true
     }
   ],
-  "pinData": {},
+  "pinData": {
+    "Schedule Trigger": [
+      {
+        "json": {
+          "id": "278422248681530",
+          "name": "OpenEdu",
+          "sheet_id": "1956435897",
+          "fb_access_token": "EAAICtjCZApBkBO3FRZCuNfKDGwSlYDyq43KEZAVTfhe0PgZCP50m6U5ZC9TT4AbL2yajN2CDKNWKBDA7bbaqBRGg2Xczm2H511wTAAExBTqoUmnSlzU78ZCIk9CXVcePaM22LyLitpv6cylU0TNav6LKxYHZCqK8fWxEE8KxV4faE1XkIh5NpluWoHjGyttOiFE8YLV9EXa2n3SkOXtAjyxbpBZADfmuZAc40z19MD2gZD",
+          "Db_link": "https://docs.google.com/spreadsheets/d/1eQar2hOIhGxyeCFvXcoxe3yNgwtXHe6kfMbN32hPMSo/edit?gid=1956435897#gid=1956435897"
+        }
+      },
+      {
+        "json": {
+          "id": "104084305892365",
+          "name": "VBI Academy",
+          "sheet_id": "2087435140",
+          "fb_access_token": "EAAICtjCZApBkBO01karTzr0oHnsUgwBwdZBWJ957Xa0qUca0SFJMuKJICYsWkcdaVYep3BDSb0Cp1OKQaEzvDY7dUb1vw1PohY2lG9L8cRlUOox2Getr4ZC0dZAUufrigwCJc4KOFOx699QSPPaBdVqZBj1UDbRvdtT2a5YW7xtQ5im3mZAiAFBh4ZAdjlEHHQIRC9wSpMTeog9KDzIKbKzkdSj87hcBiRUToYsANoZD",
+          "Db_link": "https://docs.google.com/spreadsheets/d/1eQar2hOIhGxyeCFvXcoxe3yNgwtXHe6kfMbN32hPMSo/edit?gid=2087435140#gid=2087435140"
+        }
+      },
+      {
+        "json": {
+          "id": "137851026084879",
+          "name": "The France.",
+          "sheet_id": "0",
+          "fb_access_token": "EAAICtjCZApBkBO0nuo5C5H7ZBxBpg1amcJGeXD5VZADDesBe32HpwK5gsx8rrlIZAORoAP9vbNupv4uoPOZBhdXwM6jxxpyXpZABznaNFmJZB8E1RcgOuKT7CyxBQZBZB84mx78rdSZC7ZCdklKVKzYPGFOz9BncghrRNwcMiUYNU3On61HNfsGj1fwdrs2y0kDH6ebBAkSNBIJHKFx6U0ZD",
+          "Db_link": "https://docs.google.com/spreadsheets/d/1eQar2hOIhGxyeCFvXcoxe3yNgwtXHe6kfMbN32hPMSo/edit?gid=0#gid=0"
+        }
+      }
+    ],
+    "When clicking ‘Test workflow’": [
+      {
+        "json": {
+          "id": "278422248681530",
+          "name": "OpenEdu",
+          "sheet_id": "1956435897",
+          "fb_access_token": "EAAICtjCZApBkBO3FRZCuNfKDGwSlYDyq43KEZAVTfhe0PgZCP50m6U5ZC9TT4AbL2yajN2CDKNWKBDA7bbaqBRGg2Xczm2H511wTAAExBTqoUmnSlzU78ZCIk9CXVcePaM22LyLitpv6cylU0TNav6LKxYHZCqK8fWxEE8KxV4faE1XkIh5NpluWoHjGyttOiFE8YLV9EXa2n3SkOXtAjyxbpBZADfmuZAc40z19MD2gZD",
+          "Db_link": "https://docs.google.com/spreadsheets/d/1eQar2hOIhGxyeCFvXcoxe3yNgwtXHe6kfMbN32hPMSo/edit?gid=1956435897#gid=1956435897"
+        }
+      },
+      {
+        "json": {
+          "id": "104084305892365",
+          "name": "VBI Academy",
+          "sheet_id": "2087435140",
+          "fb_access_token": "EAAICtjCZApBkBO01karTzr0oHnsUgwBwdZBWJ957Xa0qUca0SFJMuKJICYsWkcdaVYep3BDSb0Cp1OKQaEzvDY7dUb1vw1PohY2lG9L8cRlUOox2Getr4ZC0dZAUufrigwCJc4KOFOx699QSPPaBdVqZBj1UDbRvdtT2a5YW7xtQ5im3mZAiAFBh4ZAdjlEHHQIRC9wSpMTeog9KDzIKbKzkdSj87hcBiRUToYsANoZD",
+          "Db_link": "https://docs.google.com/spreadsheets/d/1eQar2hOIhGxyeCFvXcoxe3yNgwtXHe6kfMbN32hPMSo/edit?gid=2087435140#gid=2087435140"
+        }
+      },
+      {
+        "json": {
+          "id": "137851026084879",
+          "name": "The France.",
+          "sheet_id": "0",
+          "fb_access_token": "EAAICtjCZApBkBO0nuo5C5H7ZBxBpg1amcJGeXD5VZADDesBe32HpwK5gsx8rrlIZAORoAP9vbNupv4uoPOZBhdXwM6jxxpyXpZABznaNFmJZB8E1RcgOuKT7CyxBQZBZB84mx78rdSZC7ZCdklKVKzYPGFOz9BncghrRNwcMiUYNU3On61HNfsGj1fwdrs2y0kDH6ebBAkSNBIJHKFx6U0ZD",
+          "Db_link": "https://docs.google.com/spreadsheets/d/1eQar2hOIhGxyeCFvXcoxe3yNgwtXHe6kfMbN32hPMSo/edit?gid=0#gid=0"
+        }
+      }
+    ],
+    "[VBI]": [
+      {
+        "json": {
+          "id": "278422248681530",
+          "name": "OpenEdu",
+          "sheet_id": "1956435897",
+          "fb_access_token": "EAAICtjCZApBkBO3FRZCuNfKDGwSlYDyq43KEZAVTfhe0PgZCP50m6U5ZC9TT4AbL2yajN2CDKNWKBDA7bbaqBRGg2Xczm2H511wTAAExBTqoUmnSlzU78ZCIk9CXVcePaM22LyLitpv6cylU0TNav6LKxYHZCqK8fWxEE8KxV4faE1XkIh5NpluWoHjGyttOiFE8YLV9EXa2n3SkOXtAjyxbpBZADfmuZAc40z19MD2gZD",
+          "Db_link": "https://docs.google.com/spreadsheets/d/1eQar2hOIhGxyeCFvXcoxe3yNgwtXHe6kfMbN32hPMSo/edit?gid=1956435897#gid=1956435897"
+        }
+      }
+    ]
+  },
   "settings": {
     "executionOrder": "v1"
   },
-  "staticData": null,
-  "tags": [],
-  "triggerCount": 0,
-  "updatedAt": "2025-03-31T15:28:27.000Z",
-  "versionId": "7b915fd6-13b3-4a0e-b22e-affb0bf5b28f"
+  "staticData": {
+    "node:Schedule Trigger": {
+      "recurrenceRules": []
+    }
+  },
+  "tags": [
+    {
+      "createdAt": "2025-03-18T10:19:15.101Z",
+      "updatedAt": "2025-03-18T10:19:15.101Z",
+      "id": "sjcuIGR9qOjQG4Mu",
+      "name": "SOCIAL"
+    }
+  ],
+  "triggerCount": 1,
+  "updatedAt": "2025-04-08T07:27:50.000Z",
+  "versionId": "12fd8064-dbd7-4fec-a19f-fd272ae4829d"
 }
