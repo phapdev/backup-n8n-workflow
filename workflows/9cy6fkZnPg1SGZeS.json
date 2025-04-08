@@ -1,0 +1,497 @@
+{
+  "active": false,
+  "connections": {
+    "DB": {
+      "main": [
+        [
+          {
+            "node": "sheet_db",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "update_sheetDB_Failed": {
+      "main": [
+        [
+          {
+            "node": "Wait",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filter": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "update_sheetDb_done": {
+      "main": [
+        [
+          {
+            "node": "Wait",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "update_sheetDB_Failed",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Mau 1": {
+      "main": [
+        [
+          {
+            "node": "update_sheetDb_done",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "update_sheetDB_Failed",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "sheet_db": {
+      "main": [
+        [
+          {
+            "node": "Filter",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2025-04-03T04:13:51.104Z",
+  "id": "9cy6fkZnPg1SGZeS",
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "name": "[VBI] - Send Email Marketing-Event Hutech",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "5cf99dd4-a174-4b00-a1bf-4fba13f57f98",
+      "name": "DB",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        540,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "={{ $('DB').item.json.sheet_url }}",
+          "mode": "url"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 2029396423,
+          "mode": "list",
+          "cachedResultName": "Gửi email event",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1YtkvxOucBi-_jjhgTuevg3_3KqtyhmOtl-0lI03ELQo/edit#gid=2029396423"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "row_number": "={{ $('sheet_db').item.json.row_number }}",
+            "status": "Gửi mail lỗi"
+          },
+          "matchingColumns": [
+            "row_number"
+          ],
+          "schema": [
+            {
+              "id": "STT",
+              "displayName": "STT",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Tên",
+              "displayName": "Tên",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Email",
+              "displayName": "Email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "status",
+              "displayName": "status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": false
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "8cec5bc6-66a8-4aea-8862-e0752fd68343",
+      "name": "update_sheetDB_Failed",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        1980,
+        520
+      ],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "NEyiqKkPna62stP9",
+          "name": "phaplv@gfi"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "fd1be7c3-1456-4652-a358-a2b99e7e984c",
+      "name": "Loop Over Items",
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        1220,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "amount": 1
+      },
+      "id": "bd0b164d-0d16-4aca-bf73-01757d72a1d5",
+      "name": "Wait",
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        2380,
+        640
+      ],
+      "webhookId": "76196699-a7fb-4336-b347-e29ba67091ee"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "baf22b3f-cd91-43f1-8e22-5121ebb836f4",
+              "leftValue": "={{ $json.Email }}",
+              "rightValue": "={{ $json.Email }}",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            },
+            {
+              "id": "340d6cd6-5dba-4b40-a022-58f8083b6ee0",
+              "leftValue": "={{ $json.Email }}",
+              "rightValue": "@",
+              "operator": {
+                "type": "string",
+                "operation": "contains"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "looseTypeValidation": true,
+        "options": {}
+      },
+      "id": "aaae5298-a55f-46c7-a087-4a18f508964b",
+      "name": "Filter",
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2.2,
+      "position": [
+        1000,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $json.Email }}",
+        "subject": "[24H ONLY] MIỄN PHÍ Kích hoạt gói AI Premium trên OpenEdu",
+        "message": "=<!DOCTYPE html>\n<html lang=\"vi\">\n    <head>\n        <meta charset=\"UTF-8\">\n        <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n        <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">\n        <title>OpenEdu - Kích hoạt gói AI Premium</title>\n        <!--[if mso]>\n    <noscript>\n    <xml>\n        .images {\n            \n        }\n        <o:OfficeDocumentSettings>\n            <o:PixelsPerInch>96</o:PixelsPerInch>\n        </o:OfficeDocumentSettings>\n    </xml>\n    </noscript>\n    <![endif]-->\n\n        <style type=\"text/css\">\n        /* Reset CSS */\n        body, #bodyTable { \n            margin: 0;\n            padding: 0;\n            width: 100% !important;\n            height: 100% !important;\n            -webkit-text-size-adjust: 100%;\n            -ms-text-size-adjust: 100%;\n        }\n\n        /* Gmail-specific styles */\n        .ReadMsgBody { width: 100%; }\n        .ExternalClass { width: 100%; }\n        .ExternalClass * { line-height: 100%; }\n\n        /* Modern styling */\n        .email-container {\n            max-width: 800px !important;\n            margin: 0 auto;\n        }\n\n        .gradient-header {\n            background: linear-gradient(135deg, #2a73e8 0%, #1a237e 100%);\n            padding: 40px 0;\n            border-radius: 8px 8px 0 0;\n        }\n\n        .content-block {\n            background-color: #ffffff;\n            padding: 30px 40px;\n            border-radius: 0 0 8px 8px;\n            box-shadow: 0 4px 6px rgba(0,0,0,0.1);\n        }\n\n        .feature-box {\n            background: #f8f9fa;\n            border-left: 4px solid #2a73e8;\n            padding: 20px;\n            margin: 20px 0;\n            border-radius: 4px;\n        }\n\n        .cta-button {\n            background: linear-gradient(45deg, #2a73e8 0%, #1a237e 100%);\n            color: #ffffff !important;\n            padding: 15px 35px;\n            border-radius: 30px;\n            font-weight: 600;\n            text-decoration: none;\n            display: inline-block;\n            text-align: center;\n            min-width: 200px;\n            transition: all 0.3s ease;\n            border: none;\n            box-shadow: 0 4px 6px rgba(0,0,0,0.1);\n        }\n\n        .cta-button:hover {\n            background: linear-gradient(45deg, #1a237e 0%, #2a73e8 100%);\n            transform: translateY(-2px);\n            box-shadow: 0 6px 8px rgba(0,0,0,0.15);\n        }\n\n        h1 {\n            color: #ffffff;\n            font-size: 28px;\n            line-height: 1.4;\n            margin: 0;\n            padding: 0 40px;\n            text-align: center;\n            font-weight: 700;\n            text-shadow: 0 2px 4px rgba(0,0,0,0.1);\n        }\n\n        h2 {\n            color: #1a237e;\n            font-size: 22px;\n            margin: 30px 0 20px;\n            font-weight: 600;\n        }\n\n        p {\n            color: #424242;\n            font-size: 16px;\n            line-height: 1.6;\n            margin: 0 0 20px;\n        }\n\n        .feature-list {\n            list-style: none;\n            padding: 0;\n            margin: 20px 0;\n        }\n\n        .feature-list li {\n            position: relative;\n            padding-left: 28px;\n            margin-bottom: 12px;\n            color: #424242;\n            font-size: 16px;\n        }\n\n\n        .highlight-box {\n            background: rgba(42, 115, 232, 0.1);\n            border-radius: 8px;\n            padding: 20px;\n            margin: 10px 0;\n        }\n        .qr-code-openedu {\n            width: 200px;\n            height: 200px;\n            text-align: center;\n            margin: 0 auto;\n        }\n        .qr-code-openedu div {\n            width: 100%;\n            height: 100%;\n        }\n        .images-qr {\n            height: 200px;\n            width: 200px;\n            background: url('https://res.cloudinary.com/dqtutjlng/image/upload/v1743762166/event-hutech/q1aqzginizckvtfomjfe.png');\n            background-size: cover;\n            background-position: center;\n            background-repeat: no-repeat;\n        }\n\n        .edu-whale {\n            width: 227px;\n            height: 296px;\n            background: url('https://res.cloudinary.com/dqtutjlng/image/upload/v1743771557/event-hutech/ejdyvfzvj0ri98qmjhsz.png');\n            background-size: cover;\n            background-position: center;\n            background-repeat: no-repeat;\n            margin: 0 auto;\n        }\n        /* Responsive styles */\n        @media screen and (max-width: 600px) {\n            .email-container {\n                width: 100% !important;\n            }\n            \n            .content-block {\n                padding: 20px !important;\n            }\n\n            h1 {\n                font-size: 24px !important;\n                padding: 0 20px !important;\n            }\n\n            .cta-button {\n                width: 100% !important;\n                min-width: unset !important;\n                box-sizing: border-box !important;\n            }\n        }\n    </style>\n    </head>\n    <body style=\"margin: 0; padding: 0; background-color: #f6f6f6;\">\n        <div style=\"width: 100%; background-color: #f6f6f6; padding: 40px 0;\">\n            <table role=\"presentation\" cellpadding=\"0\" cellspacing=\"0\"\n                width=\"100%\" class=\"email-container\">\n                <tr>\n                    <td class=\"content-block\">\n                        <div class=\"edu-whale\"></div>\n                        <p style=\"font-size: 18px; color: #1a237e;\">\n                            Xin chào! Mình là <strong\n                                style=\"color: rgb(80 85 215);\">EduWhale</strong>,\n                            Cá Voi siêu thông minh\n                            đến từ <strong\n                                style=\"color: rgb(80 85 215);\">OpenEdu</strong>\n                            đây!\n                        </p>\n\n                        <div class=\"highlight-box\">\n                            <p style=\"margin-bottom: 0;\">\n                                Chúc mừng bạn đã nhận được gói AI Premium\n                                \"đỉnh nóc kịch trần\" – <strong\n                                    style=\"color: #ea4335;\">MIỄN PHÍ 2\n                                    THÁNG</strong> thay vì tốn đến <strong\n                                    style=\"color: #ea4335;\">120\n                                    usd</strong> để sử\n                                dụng đầy đủ các siêu trợ lý AI như: ChatGPT 4,\n                                Claude, Gemini... hỗ trợ học, nghiên cứu, làm\n                                slide, viết báo cáo – Cực chill, Cực nhanh, Cực\n                                chất! 😎✨\n                            </p>\n                        </div>\n\n                        <h3 style=\"color: #1a237e; margin-top: 0;\">👉 Vào sử\n                            dung ngay để kích hoạt <strong>MIỄN PHÍ</strong> tài\n                            khoản AI Premium\n                        </h3>\n                        <div style=\"text-align: center; margin: 30px 0;\">\n                            <a href=\"https://openedu.net\" class=\"cta-button\"\n                                style=\"text-align: center; color: #ffffff !important;\">\n                                Kích hoạt ngay tại đây\n                            </a>\n                        </div>\n\n                        <div class=\"highlight-box\">\n                            <p style=\"margin-bottom: 0;\">\n                                <strong style=\"color: #ea4335;\">Đặc biệt\n                                    hơn</strong>, <strong\n                                    style=\"color: rgb(80 85 215);\">EduWhale</strong>\n                                còn có <strong>1 iPad Gen 10, 1 tai nghe Airpods\n                                    4 và 1 chuột không dây Logitech\n                                    M650</strong> chờ bạn trong tuần này với\n                                chương trình \"Học vui - Rủ bạn nhận quà\"\n                            </p>\n                        </div>\n\n                        <h3 style=\"color: #1a237e; margin-top: 0;\">💬 Tham gia\n                            nhận thưởng & Hỗ trợ tài khoản AI Premium ngay bên\n                            dưới</h3>\n                        <div style=\"text-align: center; margin: 30px 0;\">\n                            <a href=\"https://zalo.me/g/kgirzf309\"\n                                class=\"cta-button\"\n                                style=\"text-align: center; color: #ffffff !important;\">\n                                Hỗ trợ nhanh tại đây\n                            </a>\n                        </div>\n\n                        <div class=\"feature-box\">\n                            <p style=\"margin-bottom: 10px;\"><strong\n                                    style=\"color: rgb(80 85 215);\">EduWhale</strong>\n                                <strong>và\n                                    các bạn support dễ thương đang đợi\n                                    bạn:</strong></p>\n                            <ul class=\"feature-list\">\n                                <li> ✓ Giải đáp thắc mắc</li>\n\n                                <li> ✓ Hướng dẫn dùng AI Agent</li>\n                                <li> ✓ Hướng dẫn tham gia chương trình\n                                    \"Học Vui - Rủ Bạn Nhận Quà\" với các phần quà\n                                    CỰC Đỉnh: <strong>iPad Gen 10, Tai nghe\n                                        Bluetooth Apple AirPods 4, Chuột không\n                                        dây Logitech Signature M650 Size\n                                        L.</strong></li>\n                            </ul>\n                        </div>\n\n                        <p style=\"font-style: italic; color: #2a73e8;\">\n                            🫧 Tụi mình sẽ luôn đồng hành cùng bạn trong hành\n                            trình học thú vị & hiệu quả hơn!\n                        </p>\n\n                        <p>\n                            Hẹn gặp bạn trên <strong\n                                style=\"color: rgb(80 85 215);\">OpenEdu</strong>\n                            nhaaaa 🐳💙\n                        </p>\n\n                        <div\n                            style=\"text-align: center; margin-top: 30px; padding-top: 30px; border-top: 1px solid #e0e0e0;\">\n\n                            <p\n                                style=\"font-size: 20px; font-weight: bold; color: #1a237e; margin: 0;\">\n                                Học hay – Làm đỉnh – Nhận quà chất cùng OpenEdu!\n                            </p>\n\n                        </div>\n\n                        <div style=\"text-align: center; margin-top: 20px;\"\n                            class=\"qr-code-openedu\">\n                            <a href=\"https://zalo.me/g/kgirzf309\">\n                                <div class=\"images-qr\"></div>\n                            </a>\n                        </div>\n                    </td>\n                </tr>\n\n            </table>\n        </div>\n    </body>\n</html>\n",
+        "options": {
+          "appendAttribution": false,
+          "senderName": "OpenEdu"
+        }
+      },
+      "id": "e57e7fb4-3105-4372-b542-366faa56437f",
+      "name": "Mau 2",
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        1540,
+        480
+      ],
+      "webhookId": "fe9d3a25-bda7-4ef4-b609-734735cb8110",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "93aTFa2PStmtVwyO",
+          "name": "Support.OpenEdu"
+        }
+      },
+      "disabled": true,
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "={{ $('DB').item.json.sheet_url }}",
+          "mode": "url"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 2029396423,
+          "mode": "list",
+          "cachedResultName": "Gửi email event",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1YtkvxOucBi-_jjhgTuevg3_3KqtyhmOtl-0lI03ELQo/edit#gid=2029396423"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "row_number": "={{ $('sheet_db').item.json.row_number }}",
+            "status": "Đã gửi mail"
+          },
+          "matchingColumns": [
+            "row_number"
+          ],
+          "schema": [
+            {
+              "id": "STT",
+              "displayName": "STT",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Tên",
+              "displayName": "Tên",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Email",
+              "displayName": "Email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "status",
+              "displayName": "status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": false
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "183e6312-4535-4ddc-be4b-fa62c322f54b",
+      "name": "update_sheetDb_done",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        1980,
+        220
+      ],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "NEyiqKkPna62stP9",
+          "name": "phaplv@gfi"
+        }
+      },
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $json.Email }}",
+        "subject": "[48H ONLY] MIỄN PHÍ Kích hoạt gói AI Premium trên OpenEdu",
+        "message": "=<!DOCTYPE html>\n<html lang=\"vi\">\n    <head>\n        <meta charset=\"UTF-8\">\n        <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n        <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">\n        <title>OpenEdu - Kích hoạt gói AI Premium</title>\n        <!--[if mso]>\n    <noscript>\n    <xml>\n        .images {\n            \n        }\n        <o:OfficeDocumentSettings>\n            <o:PixelsPerInch>96</o:PixelsPerInch>\n        </o:OfficeDocumentSettings>\n    </xml>\n    </noscript>\n    <![endif]-->\n\n        <style type=\"text/css\">\n        /* Reset CSS */\n        body, #bodyTable { \n            margin: 0;\n            padding: 0;\n            width: 100% !important;\n            height: 100% !important;\n            -webkit-text-size-adjust: 100%;\n            -ms-text-size-adjust: 100%;\n        }\n\n        /* Gmail-specific styles */\n        .ReadMsgBody { width: 100%; }\n        .ExternalClass { width: 100%; }\n        .ExternalClass * { line-height: 100%; }\n\n        /* Modern styling */\n        .email-container {\n            max-width: 800px !important;\n            margin: 0 auto;\n        }\n\n        .gradient-header {\n            background: linear-gradient(135deg, #2a73e8 0%, #1a237e 100%);\n            padding: 40px 0;\n            border-radius: 8px 8px 0 0;\n        }\n\n        .content-block {\n            background-color: #ffffff;\n            padding: 30px 40px;\n            border-radius: 0 0 8px 8px;\n            box-shadow: 0 4px 6px rgba(0,0,0,0.1);\n        }\n\n        .feature-box {\n            background: #f8f9fa;\n            border-left: 4px solid #2a73e8;\n            padding: 20px;\n            margin: 20px 0;\n            border-radius: 4px;\n        }\n\n        .cta-button {\n            background: linear-gradient(45deg, #2a73e8 0%, #1a237e 100%);\n            color: #ffffff !important;\n            padding: 15px 35px;\n            border-radius: 30px;\n            font-weight: 600;\n            text-decoration: none;\n            display: inline-block;\n            text-align: center;\n            min-width: 200px;\n            transition: all 0.3s ease;\n            border: none;\n            box-shadow: 0 4px 6px rgba(0,0,0,0.1);\n        }\n\n        .cta-button:hover {\n            background: linear-gradient(45deg, #1a237e 0%, #2a73e8 100%);\n            transform: translateY(-2px);\n            box-shadow: 0 6px 8px rgba(0,0,0,0.15);\n        }\n\n        h1 {\n            color: #ffffff;\n            font-size: 28px;\n            line-height: 1.4;\n            margin: 0;\n            padding: 0 40px;\n            text-align: center;\n            font-weight: 700;\n            text-shadow: 0 2px 4px rgba(0,0,0,0.1);\n        }\n\n        h2 {\n            color: #1a237e;\n            font-size: 22px;\n            margin: 30px 0 20px;\n            font-weight: 600;\n        }\n\n        p {\n            color: #424242;\n            font-size: 16px;\n            line-height: 1.6;\n            margin: 0 0 20px;\n        }\n\n        .feature-list {\n            list-style: none;\n            padding: 0;\n            margin: 20px 0;\n        }\n\n        .feature-list li {\n            position: relative;\n            padding-left: 28px;\n            margin-bottom: 12px;\n            color: #424242;\n            font-size: 16px;\n        }\n\n\n        .highlight-box {\n            background: rgba(42, 115, 232, 0.1);\n            border-radius: 8px;\n            padding: 20px;\n            margin: 10px 0;\n        }\n        .qr-code-openedu {\n            width: 200px;\n            height: 200px;\n            text-align: center;\n            margin: 0 auto;\n        }\n        .qr-code-openedu div {\n            width: 100%;\n            height: 100%;\n        }\n        .images-qr {\n            height: 200px;\n            width: 200px;\n            background: url('https://res.cloudinary.com/dqtutjlng/image/upload/v1743762166/event-hutech/q1aqzginizckvtfomjfe.png');\n            background-size: cover;\n            background-position: center;\n            background-repeat: no-repeat;\n        }\n\n        .edu-whale {\n            width: 114px;\n            height: 148px;\n            background: url('https://res.cloudinary.com/dqtutjlng/image/upload/v1743780376/event-hutech/bfd0pk2zsrtsji06vcre.png');\n            background-size: cover;\n            background-position: center;\n            background-repeat: no-repeat;\n            margin: 0 auto;\n        }\n        /* Responsive styles */\n        @media screen and (max-width: 600px) {\n            .email-container {\n                width: 100% !important;\n            }\n            \n            .content-block {\n                padding: 20px !important;\n            }\n\n            h1 {\n                font-size: 24px !important;\n                padding: 0 20px !important;\n            }\n\n            .cta-button {\n                width: 100% !important;\n                min-width: unset !important;\n                box-sizing: border-box !important;\n            }\n        }\n    </style>\n    </head>\n    <body style=\"margin: 0; padding: 0; background-color: #f6f6f6;\">\n        <div style=\"width: 100%; background-color: #f6f6f6; padding: 40px 0;\">\n            <table role=\"presentation\" cellpadding=\"0\" cellspacing=\"0\"\n                width=\"100%\" class=\"email-container\">\n                <tr>\n                    <td class=\"content-block\">\n                        <div class=\"edu-whale\"></div>\n                        <p style=\"font-size: 18px; color: #1a237e;\">\n                            Xin chào! Mình là <strong\n                                style=\"color: rgb(80 85 215);\">EduWhale</strong>,\n                            Cá Voi siêu thông minh\n                            đến từ <strong\n                                style=\"color: rgb(80 85 215);\">OpenEdu</strong>\n                            đây!\n                        </p>\n\n                        <div class=\"highlight-box\">\n                            <p style=\"margin-bottom: 0;\">\n                                Chúc mừng bạn đã nhận được gói AI Premium\n                                \"đỉnh nóc kịch trần\" – <strong\n                                    style=\"color: #ea4335;\">MIỄN PHÍ 2\n                                    THÁNG</strong> thay vì tốn đến <strong\n                                    style=\"color: #ea4335;\">120\n                                    usd</strong> để sử\n                                dụng đầy đủ các siêu trợ lý AI như: ChatGPT 4,\n                                Claude, Gemini... hỗ trợ học, nghiên cứu, làm\n                                slide, viết báo cáo – Cực chill, Cực nhanh, Cực\n                                chất! 😎✨\n                            </p>\n                        </div>\n\n                        <h3 style=\"color: #1a237e; margin-top: 0;\">👉 Vào sử\n                            dung ngay để kích hoạt <strong>MIỄN PHÍ</strong> tài\n                            khoản AI Premium\n                        </h3>\n                        <div style=\"text-align: center; margin: 30px 0;\">\n                            <a href=\"https://openedu.net/vi/ai-agent\" class=\"cta-button\"\n                                style=\"text-align: center; color: #ffffff !important;\">\n                                Kích hoạt ngay tại đây\n                            </a>\n                        </div>\n\n                        <div class=\"highlight-box\">\n                            <p style=\"margin-bottom: 0;\">\n                                <strong style=\"color: #ea4335;\">Đặc biệt\n                                    hơn</strong>, <strong\n                                    style=\"color: rgb(80 85 215);\">EduWhale</strong>\n                                còn có <strong>1 iPad Gen 10, 1 tai nghe Airpods\n                                    4 và 1 chuột không dây Logitech\n                                    M650</strong> chờ bạn trong tuần này với\n                                chương trình \"Học vui - Rủ bạn nhận quà\"\n                            </p>\n                        </div>\n\n                        <h3 style=\"color: #1a237e; margin-top: 0;\">💬 Tham gia\n                            nhận thưởng & Hỗ trợ tài khoản AI Premium ngay bên\n                            dưới</h3>\n                        <div style=\"text-align: center; margin: 30px 0;\">\n                            <a href=\" https://zalo.me/g/tkrnmu675\"\n                                class=\"cta-button\"\n                                style=\"text-align: center; color: #ffffff !important;\">\n                                Hỗ trợ nhanh tại đây\n                            </a>\n                        </div>\n\n                        <div class=\"feature-box\">\n                            <p style=\"margin-bottom: 10px;\"><strong\n                                    style=\"color: rgb(80 85 215);\">EduWhale</strong>\n                                <strong>và\n                                    các bạn support dễ thương đang đợi\n                                    bạn:</strong></p>\n                            <ul class=\"feature-list\">\n                                <li> ✓ Giải đáp thắc mắc</li>\n\n                                <li> ✓ Hướng dẫn dùng AI Agent</li>\n                                <li> ✓ Hướng dẫn tham gia chương trình\n                                    \"Học Vui - Rủ Bạn Nhận Quà\" với các phần quà\n                                    CỰC Đỉnh: <strong>iPad Gen 10, Tai nghe\n                                        Bluetooth Apple AirPods 4, Chuột không\n                                        dây Logitech Signature M650 Size\n                                        L.</strong></li>\n                            </ul>\n                        </div>\n\n                        <p style=\"font-style: italic; color: #2a73e8;\">\n                            🫧 Tụi mình sẽ luôn đồng hành cùng bạn trong hành\n                            trình học thú vị & hiệu quả hơn!\n                        </p>\n\n                        <p>\n                            Hẹn gặp bạn trên <strong\n                                style=\"color: rgb(80 85 215);\">OpenEdu</strong>\n                            nhaaaa 🐳💙\n                        </p>\n\n                        <div\n                            style=\"text-align: center; margin-top: 30px; padding-top: 30px; border-top: 1px solid #e0e0e0;\">\n\n                            <p\n                                style=\"font-size: 20px; font-weight: bold; color: #1a237e; margin: 0;\">\n                                Học hay – Làm đỉnh – Nhận quà chất cùng OpenEdu!\n                            </p>\n\n                        </div>\n\n                        <div style=\"text-align: center; margin-top: 20px;\"\n                            class=\"qr-code-openedu\">\n                            <a href=\"https://zalo.me/g/kgirzf309\">\n                                <div class=\"images-qr\"></div>\n                            </a>\n                        </div>\n                    </td>\n                </tr>\n\n            </table>\n        </div>\n    </body>\n</html>\n",
+        "options": {
+          "appendAttribution": false,
+          "senderName": "OpenEdu"
+        }
+      },
+      "id": "44c1486f-db80-471c-89a1-8eacc1663c23",
+      "name": "Mau 1",
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        1540,
+        240
+      ],
+      "webhookId": "fe9d3a25-bda7-4ef4-b609-734735cb8110",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "93aTFa2PStmtVwyO",
+          "name": "Support.OpenEdu"
+        }
+      },
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "={{ $json.sheet_url }}",
+          "mode": "url"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 2029396423,
+          "mode": "list",
+          "cachedResultName": "Gửi email event",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1YtkvxOucBi-_jjhgTuevg3_3KqtyhmOtl-0lI03ELQo/edit#gid=2029396423"
+        },
+        "filtersUI": {
+          "values": [
+            {
+              "lookupColumn": "status"
+            },
+            {
+              "lookupColumn": "status",
+              "lookupValue": "Mặc định"
+            }
+          ]
+        },
+        "combineFilters": "OR",
+        "options": {}
+      },
+      "id": "32765691-3111-4489-9600-d893e0fa965f",
+      "name": "sheet_db",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [
+        780,
+        300
+      ],
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "yYlXvFm0GijEE5IG",
+          "name": "Marketing OpenEdu"
+        }
+      }
+    }
+  ],
+  "pinData": {
+    "DB": [
+      {
+        "json": {
+          "sheet_url": "https://docs.google.com/spreadsheets/d/1YtkvxOucBi-_jjhgTuevg3_3KqtyhmOtl-0lI03ELQo/edit?gid=2029396423#gid=2029396423"
+        }
+      }
+    ]
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [
+    {
+      "createdAt": "2025-04-03T04:13:54.643Z",
+      "updatedAt": "2025-04-03T04:13:54.643Z",
+      "id": "4cUX16YEBt2GbIZn",
+      "name": "EMAIL"
+    }
+  ],
+  "triggerCount": 0,
+  "updatedAt": "2025-04-05T15:22:17.000Z",
+  "versionId": "cced9834-3064-4dc5-a2b2-56a3bfafc7e2"
+}
